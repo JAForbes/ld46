@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "attain": "./attain.js",
+    "bss": "./bss.js",
+    "marked": "./marked.js",
+    "mithril": "./mithril.js",
+    "mithril-stream": "./mithril-stream.js"
+  }
+}
