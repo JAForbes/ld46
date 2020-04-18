@@ -116,3 +116,13 @@ There's also serialization.  I've been careful to separate serializable and non-
 While I was typing that I was thinking, repeat can be a rate.
 
 So for guns I can say, repeat every 100ms, if the sound effect takes 100ms, that's gapless playback.  Then I don't really want to know how long a sound goes for, so I can represent that as a ratio, e.g. repeating gaplessly could be 1, as in repeat every `duration * 1`, repeating never could be `0`.  Repeating ever 200ms could be `repeatRate: 2`.  That might seem confusing, but I think models what I need to model pretty simply.
+
+##### 2020-04-28    23:37 PM
+
+Took a break for an hour, then came back and just generated a bunch of sounds.  My brain wasn't ready for code.  It felt good even though I know I was procrastinating.  At this point my game is just a single repeating sprite, but there's a lot of potential in this system once I start iterating on art.  I might give the code a break and just art it up tomorrow morning.
+
+I also think I understand sfxr/bfxr/jfxr a bit better, I was actually tuning the dials finessing the effects I wanted.  Getting a low repeating engine hum was difficult, especially getting a perfect loop.  But I think I've got enough to achieve some ambience without blowing out the filesize.
+
+I might have a 2-3 hour sleep.  Wake up at 2-3 am and just do some art.  We'll see.  My brain might be ready to code the sound system.  I'd really like the system to change volume based on distance for some effects.  I've done that before and it added a lot of immersion.  I think it would be especially important for this kind of game.
+
+Also was thinking of names.  The best I came up with so far was convoyage.  As in "bon voyage" as "convoy" as a kind of tongue in cheek name implying the convoy's your protecting aren't likely to survive.
