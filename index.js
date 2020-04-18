@@ -1,9 +1,18 @@
 import v from './web_modules/attain/lib/view.js'
+import gestures from './gestures.js'
 
 function App({ v }){
-	console.log('hello ld46', v)
 
-	return () => v('h1', 'ld46')
+	gestures(document.body, x => {
+		console.log(x.type)
+	})
+
+	return () => v('.game'
+		,v('.hud')
+		,v('.sprites')
+		,v('.menu')
+		,v('.loader')
+	)
 }
 
 v(document.body, {
