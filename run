@@ -5,6 +5,21 @@ function dev(){
     npx servor . index.html 8080
 }
 
+function deploy(){
+    mkdir -p dist
+    rm -fr ./dist/*
+
+    cp index.html ./dist/index.html
+    cp -r web_modules ./dist/
+    cp *.js ./dist/
+
+    pushd dist
+        aws s3 sync . s3://ld46.james-forbes.com --profile admin
+        aws s3 cp index.html s3://ld46.james-forbes.com/index.html --profile admin
+    popd
+
+}
+
 function export-sprites(){
     mkdir -p ./assets
     rm -fr ./assets/*
@@ -25,7 +40,8 @@ function export-sprites(){
 function ...(){
     npx snowpack \
     && export-sprites \
-    && git add -A && git commit -m "..." && git push
+    && git add -A && git commit -m "..." && git push \
+    && bash run deploy
 }
 
 eval "$@"
