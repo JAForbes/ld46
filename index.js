@@ -3,13 +3,21 @@ import gestures from './gestures.js'
 
 function App({ v }){
 
+	var lastEvent = []
 	gestures(document.body, x => {
-		console.log(x.type)
+		lastEvent.unshift(x.type)
+		lastEvent.length = 10
+		v.redraw()
 	})
 
 	return () => v('.game'
 		,v('.hud')
-		,v('.sprites')
+		,v('.sprites'
+			+ v.css`
+				display: grid;
+			`
+			, lastEvent.map( x => v('p', x) )
+		)
 		,v('.menu')
 		,v('.loader')
 	)
