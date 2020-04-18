@@ -2,7 +2,7 @@
     "sounds": [
         {
             "name": "test",
-            "src": "./sounds/test/wav"
+            "src": "/snd/test.wav"
         }
     ]
 }

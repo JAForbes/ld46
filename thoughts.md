@@ -57,3 +57,9 @@ I think I want this game to work with just mouse or touch.  I'll probably add ke
 So I'm going to fiddle with hammerjs a bit, and see if I can get an animated sprite move with my touch input.
 
 I've got a vague idea what I want the game to be, but if I can get things feeling nice that's a huge start.
+
+##### 2020-04-28    2:27 PM
+
+I've got hammer working ok.  Took me a while to figure out the API.  The docs are super confusing but the examples make it pretty clear.
+
+Right now I'm looking into menu/ui states.  I feel pretty confident just building some kind of game thing, but getting the UI transitions feeling nice is new for me in a game.  I'm testing on a phone, making sure I can get audio playing and such.  I'm considering forcing people to pin to desktop so the toolbar can be hidden constantly.  I know that's seen as bad practice but that's going to get super annoying when playing.

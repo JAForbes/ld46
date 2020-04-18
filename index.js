@@ -1,29 +1,62 @@
-import v from './web_modules/attain/lib/view.js'
+import V from './web_modules/attain/lib/view.js'
 import gestures from './gestures.js'
-import Loader from './loader.js'
 
-function App({ v, state }){
+import metadataService from './services/metdata.js'
+import soundsClickService from './services/sound.js'
 
-	const loader = Loader()
-	loader.add([
-		'./frames.json',
-		'./sheet.png',
-		'./test.wav'
-	])
+function App({ v, route: parent, state, stream }){
+
+	const sheet = stream()
+	const sounds = stream()
+	const route = parent.subroute('Route', x => x.Loading(), {
+		Loading: '/',
+		Click: '/click',
+		Menu: '/menu',
+		Game: '/game'
+	})
+
+	Object.assign(window, { state, sheet, sounds, route })
+
+	route( route.Loading() )
+
+	soundsClickService({ v, route, state, sounds })
+	metadataService({ v, route, sheet, state })
 	gestures(document.body, x => {
-		console.log(x.type)
+		state.lastGesture(x)
+		x.preventDefault()
 		// v.redraw()
 	})
 
-	return () => v('.game'
-		,v('.hud')
-		,v('.sprites')
-		,v('.menu')
-		,v('.loader')
+	route.map( () => v.redraw() )
+
+	return () => console.log('render') || v('.game'
+		, route.isLoading( route() ) && v('p', 'Loading')
+		, route.isMenu( route() )
+			&& v('.menu'
+				, v('button', {
+					onclick(){
+						route( route.Game() )
+					}
+				}, 'Play')
+			)
+		, route.isClick( route() ) && v('p', 'Click')
+		, route.isGame( route() )
+			&& v('.game'
+				,v('.sprites'
+					,v('p', 'Game')
+				)
+				,v('.hud'
+					, v('button', {
+						onclick(){
+							route( route.Menu() )
+						}
+					}, 'Menu')
+				)
+			)
 	)
 }
 
-v(document.body, {
+V(document.body, {
 	render({ v, ...attrs }){
 		return v(App, { v, ...attrs })
 	}
