@@ -1,0 +1,27 @@
+{
+  "name": "ld46",
+  "version": "0.0.0",
+  "description": "Ludum Dare 46",
+  "main": "index.js",
+  "snowpack": {
+    "webDependencies": [
+      "mithril",
+      "mithril-stream",
+      "bss",
+      "marked",
+      "attain"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "attain": "0.0.187",
+    "bss": "1.6.4",
+    "marked": "0.8.2",
+    "mithril": "2.0.4",
+    "mithril-stream": "2.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function asperite(){
+    ./tools/aseprite/Aseprite.exe -b "$@"
+}
+
+function export-sprites(){
+    ./tools/aseprite/Aseprite.exe \
+        --split-layers \
+        -b output/Sprite-0001.aseprite \
+        --sheet ./output/sheet.png \
+        --data ./output/frames.json \
+        --list-layers \
+        --list-tags \
+        --list-tags \
+        --filename-format '{"layer": "{layer}", "frame": {frame1}}' \
+        --format json-array \
+        --all-layers
+}
+
+eval "$@"
