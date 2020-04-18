@@ -12,6 +12,8 @@ function deploy(){
     cp index.html ./dist/index.html
     cp -r web_modules ./dist/
     cp *.js ./dist/
+    cp -r snd ./dist
+    cp -r sprites ./dist
 
     pushd dist
         aws s3 sync . s3://ld46.james-forbes.com --profile admin

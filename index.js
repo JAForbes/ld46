@@ -1,23 +1,23 @@
 import v from './web_modules/attain/lib/view.js'
 import gestures from './gestures.js'
+import Loader from './loader.js'
 
-function App({ v }){
+function App({ v, state }){
 
-	var lastEvent = []
+	const loader = Loader()
+	loader.add([
+		'./frames.json',
+		'./sheet.png',
+		'./test.wav'
+	])
 	gestures(document.body, x => {
-		lastEvent.unshift(x.type)
-		lastEvent.length = 10
-		v.redraw()
+		console.log(x.type)
+		// v.redraw()
 	})
 
 	return () => v('.game'
 		,v('.hud')
-		,v('.sprites'
-			+ v.css`
-				display: grid;
-			`
-			, lastEvent.map( x => v('p', x) )
-		)
+		,v('.sprites')
 		,v('.menu')
 		,v('.loader')
 	)

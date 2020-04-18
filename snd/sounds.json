@@ -1,0 +1,8 @@
+{
+    "sounds": [
+        {
+            "name": "test",
+            "src": "./sounds/test/wav"
+        }
+    ]
+}
