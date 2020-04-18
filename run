@@ -36,7 +36,7 @@ function export-sprites(){
         --list-layers \
         --list-tags \
         --list-tags \
-        --filename-format '{"layer": "{layer}", "title": "{title}", "frame": {frame1}}' \
+        --filename-format '{"layer": "{layer}", "tag": "{tag}", "title": "{title}", "frameNumber": {frame1}}' \
         --format json-array \
         --all-layers
 }

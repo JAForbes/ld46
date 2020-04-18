@@ -19,7 +19,9 @@ export default function soundsClickService({
 				, A.stream.filter(
 					x => x
 						&& x.type == 'tap'
-						&& route.isClick( route() )
+						&& (
+							route.isClick( route() )
+						)
 				)
 				, A.stream.dropRepeats
 				, A.stream.map(() => {

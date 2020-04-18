@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 1}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 1}",
     "frame": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -9,7 +9,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 2}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 2}",
     "frame": { "x": 32, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -18,7 +18,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 3}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 3}",
     "frame": { "x": 64, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -27,7 +27,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 4}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 4}",
     "frame": { "x": 96, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -36,7 +36,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 5}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 5}",
     "frame": { "x": 128, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -45,7 +45,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 6}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 6}",
     "frame": { "x": 160, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -54,7 +54,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 7}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 7}",
     "frame": { "x": 192, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 8}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 8}",
     "frame": { "x": 224, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -72,7 +72,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 9}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 9}",
     "frame": { "x": 256, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -81,7 +81,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 10}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 10}",
     "frame": { "x": 288, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -90,7 +90,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 11}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 11}",
     "frame": { "x": 320, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -99,7 +99,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 12}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 12}",
     "frame": { "x": 352, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -108,7 +108,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 13}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 13}",
     "frame": { "x": 384, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -117,7 +117,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 14}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 14}",
     "frame": { "x": 416, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -126,7 +126,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 15}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 15}",
     "frame": { "x": 448, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -135,7 +135,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 16}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 16}",
     "frame": { "x": 480, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -144,7 +144,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 17}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 17}",
     "frame": { "x": 512, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -153,7 +153,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 18}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 18}",
     "frame": { "x": 544, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -162,7 +162,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 19}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 19}",
     "frame": { "x": 576, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -171,7 +171,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Base\", \"title\": \"character\", \"frame\": 20}",
+    "filename": "{\"layer\": \"Base\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 20}",
     "frame": { "x": 608, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -180,7 +180,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 1}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 1}",
     "frame": { "x": 0, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -189,7 +189,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 2}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 2}",
     "frame": { "x": 32, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -198,7 +198,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 3}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 3}",
     "frame": { "x": 64, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -207,7 +207,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 4}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 4}",
     "frame": { "x": 96, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -216,7 +216,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 5}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 5}",
     "frame": { "x": 128, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -225,7 +225,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 6}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 6}",
     "frame": { "x": 160, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -234,7 +234,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 7}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 7}",
     "frame": { "x": 192, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -243,7 +243,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 8}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 8}",
     "frame": { "x": 224, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -252,7 +252,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 9}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 9}",
     "frame": { "x": 256, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -261,7 +261,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 10}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 10}",
     "frame": { "x": 288, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -270,7 +270,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 11}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 11}",
     "frame": { "x": 320, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -279,7 +279,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 12}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 12}",
     "frame": { "x": 352, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -288,7 +288,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 13}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 13}",
     "frame": { "x": 384, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -297,7 +297,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 14}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 14}",
     "frame": { "x": 416, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -306,7 +306,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 15}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 15}",
     "frame": { "x": 448, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -315,7 +315,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 16}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 16}",
     "frame": { "x": 480, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -324,7 +324,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 17}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 17}",
     "frame": { "x": 512, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -333,7 +333,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 18}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 18}",
     "frame": { "x": 544, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -342,7 +342,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 19}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 19}",
     "frame": { "x": 576, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -351,7 +351,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Engines\", \"title\": \"character\", \"frame\": 20}",
+    "filename": "{\"layer\": \"Engines\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 20}",
     "frame": { "x": 608, "y": 32, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -360,7 +360,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Scribble\", \"title\": \"character2\", \"frame\": 1}",
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 1}",
     "frame": { "x": 0, "y": 64, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -369,7 +369,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Scribble\", \"title\": \"character2\", \"frame\": 2}",
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 2}",
     "frame": { "x": 32, "y": 64, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -378,7 +378,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Scribble\", \"title\": \"character2\", \"frame\": 3}",
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 3}",
     "frame": { "x": 64, "y": 64, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -387,7 +387,160 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Scribble Copy\", \"title\": \"character2\", \"frame\": 1}",
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"North\", \"title\": \"character\", \"frameNumber\": 4}",
+    "frame": { "x": 96, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 5}",
+    "frame": { "x": 128, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 6}",
+    "frame": { "x": 160, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 7}",
+    "frame": { "x": 192, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"NorthEast\", \"title\": \"character\", \"frameNumber\": 8}",
+    "frame": { "x": 224, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 9}",
+    "frame": { "x": 256, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 10}",
+    "frame": { "x": 288, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 11}",
+    "frame": { "x": 320, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"East\", \"title\": \"character\", \"frameNumber\": 12}",
+    "frame": { "x": 352, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 13}",
+    "frame": { "x": 384, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 14}",
+    "frame": { "x": 416, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 15}",
+    "frame": { "x": 448, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"SouthEast\", \"title\": \"character\", \"frameNumber\": 16}",
+    "frame": { "x": 480, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 17}",
+    "frame": { "x": 512, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 18}",
+    "frame": { "x": 544, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 19}",
+    "frame": { "x": 576, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Firing\", \"tag\": \"South\", \"title\": \"character\", \"frameNumber\": 20}",
+    "frame": { "x": 608, "y": 64, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Scribble\", \"tag\": \"\", \"title\": \"character2\", \"frameNumber\": 1}",
     "frame": { "x": 0, "y": 96, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -396,7 +549,7 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Scribble Copy\", \"title\": \"character2\", \"frame\": 2}",
+    "filename": "{\"layer\": \"Scribble\", \"tag\": \"\", \"title\": \"character2\", \"frameNumber\": 2}",
     "frame": { "x": 32, "y": 96, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -405,8 +558,35 @@
     "duration": 100
    },
    {
-    "filename": "{\"layer\": \"Scribble Copy\", \"title\": \"character2\", \"frame\": 3}",
+    "filename": "{\"layer\": \"Scribble\", \"tag\": \"\", \"title\": \"character2\", \"frameNumber\": 3}",
     "frame": { "x": 64, "y": 96, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Scribble Copy\", \"tag\": \"\", \"title\": \"character2\", \"frameNumber\": 1}",
+    "frame": { "x": 0, "y": 128, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Scribble Copy\", \"tag\": \"\", \"title\": \"character2\", \"frameNumber\": 2}",
+    "frame": { "x": 32, "y": 128, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "{\"layer\": \"Scribble Copy\", \"tag\": \"\", \"title\": \"character2\", \"frameNumber\": 3}",
+    "frame": { "x": 64, "y": 128, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
@@ -419,7 +599,7 @@
   "version": "1.2.17",
   "image": "sheet.png",
   "format": "RGBA8888",
-  "size": { "w": 640, "h": 128 },
+  "size": { "w": 640, "h": 160 },
   "scale": "1",
   "frameTags": [
    { "name": "North", "from": 0, "to": 3, "direction": "forward" },
@@ -431,6 +611,7 @@
   "layers": [
    { "name": "Base", "opacity": 255, "blendMode": "normal" },
    { "name": "Engines", "opacity": 255, "blendMode": "normal" },
+   { "name": "Firing", "opacity": 255, "blendMode": "normal" },
    { "name": "Scribble", "opacity": 255, "blendMode": "normal" },
    { "name": "Scribble Copy", "opacity": 255, "blendMode": "normal" }
   ]

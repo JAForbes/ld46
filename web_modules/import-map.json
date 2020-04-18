@@ -5,6 +5,7 @@
     "hammerjs": "./hammerjs.js",
     "marked": "./marked.js",
     "mithril": "./mithril.js",
-    "mithril-stream": "./mithril-stream.js"
+    "mithril-stream": "./mithril-stream.js",
+    "ramda": "./ramda.js"
   }
 }

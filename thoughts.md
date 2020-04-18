@@ -79,3 +79,14 @@ So for example, if I have a ship, and there's a section called `accelerating` an
 Just walked around a bit and though about that.  I don't think aseprite's data model will give me what I need.  But layers can.  So if I use frame tags as just positions/directions.  And then use layers for actions I think it's doable.
 
 Different types of weapons could be doable, but not sure if I'll bother in the jam.  It'd be a different project file.
+
+##### 2020-04-28    20:01 PM
+
+The system to establish which tiles to render on screen is sort of ready to go.  But I don't want to accidentally reset an animation by presuming that just because the particular condition that triggered a cycle just started, that a separate cycle hadn't also just ended that used the same animation.
+
+I think I need to store the `title+layer+tag` that are currently rendering, irrespective of why, and when they started.  That way I can pick the correct frame.
+
+So I guess the first thing to do is figure out the unique set of title+layer+tag that has to render, and then check if they are already rendering.
+If they are resume, if not start.
+
+Same goes for sounds too I guess.

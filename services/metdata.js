@@ -1,4 +1,5 @@
 import Loader from '../loader.js'
+import * as R from '../web_modules/ramda.js'
 
 export default function metadataService({ v, sheet, state, route }){
 	Loader({
@@ -18,7 +19,16 @@ export default function metadataService({ v, sheet, state, route }){
 					({ filename, ...rest }) => ({ ...rest, ...JSON.parse(filename)})
 				)
 			)
+
+			const f =
+				R.pipe(
+					R.groupBy( x => `${x.title}${x.tag}${x.layer}` )
+				)
+
+			state.framesIndexed( f( state.frames() ) )
+
 			state.soundJSON(sounds)
+
 			route( route.Click() )
 		}
 	)
