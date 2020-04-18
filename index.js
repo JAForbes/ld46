@@ -13,6 +13,8 @@ function App({ v, route: parent, state, stream }){
 		Click: '/click',
 		Menu: '/menu',
 		Game: '/game'
+	}, {
+		replace: true
 	})
 
 	Object.assign(window, { state, sheet, sounds, route })
