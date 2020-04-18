@@ -63,3 +63,19 @@ I've got a vague idea what I want the game to be, but if I can get things feelin
 I've got hammer working ok.  Took me a while to figure out the API.  The docs are super confusing but the examples make it pretty clear.
 
 Right now I'm looking into menu/ui states.  I feel pretty confident just building some kind of game thing, but getting the UI transitions feeling nice is new for me in a game.  I'm testing on a phone, making sure I can get audio playing and such.  I'm considering forcing people to pin to desktop so the toolbar can be hidden constantly.  I know that's seen as bad practice but that's going to get super annoying when playing.
+
+##### 2020-04-28    3:54 PM
+
+Sounds/Metadata/Images are now loading and there's some basic routing between pages based on game state.  It's just a black screen with some default buttons and images and at 4pm that feels really bad, but considering it's only actually been 5 hours out of 48, it's okay.  There's still 43 to go.  And these are the sort of things that really bothered me in previous entries.  Can probably serve as a bit of a template for future jams.
+
+So my next task is to render these sprites based on the frames.json and to be able to select applicable animations based on tags.  From there I should be able to do things like tell the game to render the ship flying, with the guns shooting.
+
+The interesting part will be, overlapping layers playing different animations independently.
+
+So for example, if I have a ship, and there's a section called `accelerating` and it's got some engines lit up, but then I've got another section called `shooting` and the guns light up, well then I want to be able to shoot and accelerate at the same time.  So I want to be able to know which layers to update/render when accelerating, and which ones not to.
+
+---
+
+Just walked around a bit and though about that.  I don't think aseprite's data model will give me what I need.  But layers can.  So if I use frame tags as just positions/directions.  And then use layers for actions I think it's doable.
+
+Different types of weapons could be doable, but not sure if I'll bother in the jam.  It'd be a different project file.
