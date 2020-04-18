@@ -9,7 +9,8 @@
       "mithril-stream",
       "bss",
       "marked",
-      "attain/lib/view.js"
+      "attain/lib/view.js",
+      "hammerjs"
     ]
   },
   "scripts": {
@@ -20,6 +21,7 @@
   "dependencies": {
     "attain": "0.0.187",
     "bss": "1.6.4",
+    "hammerjs": "2.0.8",
     "marked": "0.8.2",
     "mithril": "2.0.4",
     "mithril-stream": "2.0.0"

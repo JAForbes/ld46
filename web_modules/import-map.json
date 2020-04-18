@@ -2,6 +2,7 @@
   "imports": {
     "attain/lib/view.js": "./attain/lib/view.js",
     "bss": "./bss.js",
+    "hammerjs": "./hammerjs.js",
     "marked": "./marked.js",
     "mithril": "./mithril.js",
     "mithril-stream": "./mithril-stream.js"

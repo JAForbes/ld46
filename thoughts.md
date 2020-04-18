@@ -48,3 +48,12 @@ Yep totally works.
 Because I'm using github pages, I need to check in all these built files.  But that seems really annoying.  I'd prefer to not need to run a build to update the github pages example.  It'd be so much cooler if whatever was in source, was in source.  But if I want this to load quickly, I'm going to minify things anyways, so maybe that's not necessary.  If I'm minifying, I should not check in the minified code, and then that means there's a different process for local as for shipped.
 
 I think for now, I'll check in the frames.json + sheet.png.  And revisit this later...
+
+
+##### 2020-04-28    12:14 PM
+
+I think I want this game to work with just mouse or touch.  I'll probably add keyboard support as a stretch goal, but I've done that so many times before.
+
+So I'm going to fiddle with hammerjs a bit, and see if I can get an animated sprite move with my touch input.
+
+I've got a vague idea what I want the game to be, but if I can get things feeling nice that's a huge start.
