@@ -1,6 +1,6 @@
 {
   "imports": {
-    "attain": "./attain.js",
+    "attain/lib/view.js": "./attain/lib/view.js",
     "bss": "./bss.js",
     "marked": "./marked.js",
     "mithril": "./mithril.js",

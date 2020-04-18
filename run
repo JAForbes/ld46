@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function dev(){
+    npx snowpack
     npx servor . index.html 8080
 }
 
@@ -22,7 +23,8 @@ function export-sprites(){
 }
 
 function ...(){
-    export-sprites \
+    npx snowpack \
+    && export-sprites \
     && git add -A && git commit -m "..." && git push
 }
 

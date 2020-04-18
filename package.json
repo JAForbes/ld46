@@ -9,7 +9,7 @@
       "mithril-stream",
       "bss",
       "marked",
-      "attain"
+      "attain/lib/view.js"
     ]
   },
   "scripts": {
