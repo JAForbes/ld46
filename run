@@ -1,19 +1,18 @@
 #!/bin/bash
 
-function asperite(){
-    ./tools/aseprite/Aseprite.exe -b "$@"
-}
-
 function export-sprites(){
+    mkdir -p ./assets
+    rm -fr ./assets/*
+
     ./tools/aseprite/Aseprite.exe \
         --split-layers \
-        -b output/Sprite-0001.aseprite \
-        --sheet ./output/sheet.png \
-        --data ./output/frames.json \
+        -b ./sprites/*.aseprite \
+        --sheet ./assets/sheet.png \
+        --data ./assets/frames.json \
         --list-layers \
         --list-tags \
         --list-tags \
-        --filename-format '{"layer": "{layer}", "frame": {frame1}}' \
+        --filename-format '{"layer": "{layer}", "title": "{title}", "frame": {frame1}}' \
         --format json-array \
         --all-layers
 }

@@ -28,5 +28,23 @@ Also a space game would probably have a lot of UI, e.g. upgrading weapons/hulls,
 
 I might change my mind soon, who knows.  I really just want to get a basic workflow with this sprite app going so I can mess around with art assets instead of code when I'm really tired tomorrow.
 
+##### 2020-04-28    12:14 PM
 
+I was thinking I'd have multiple characters/assets in a single aseprite project so I'd only load one sprite sheet.  But it looks like that's not how the software is designed.  So I'll need some process for the JS to know what sprite sheets to load, and what data to load.  Maybe it's all manual but I'd really like this game to be asset driven, so if there's a new asset, it's automatically available.  So if I can get my export script to export multiple projects that'd be amazing.  Oh maybe I'm misunderstanding the export script.  maybe you have separate .aseprite files but you can do a single export with multiple files.  I need to re-read the docs.
 
+Yep, it's right there at the top `FILES...`
+
+```
+Usage:
+  aseprite.exe [OPTIONS] [FILES]...
+```
+
+Ok so I guess each asset has its own project file, which is way easier/nicer.  I'll test that out.
+
+---
+
+Yep totally works.
+
+Because I'm using github pages, I need to check in all these built files.  But that seems really annoying.  I'd prefer to not need to run a build to update the github pages example.  It'd be so much cooler if whatever was in source, was in source.  But if I want this to load quickly, I'm going to minify things anyways, so maybe that's not necessary.  If I'm minifying, I should not check in the minified code, and then that means there's a different process for local as for shipped.
+
+I think for now, I'll check in the frames.json + sheet.png.  And revisit this later...
