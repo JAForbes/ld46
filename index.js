@@ -37,6 +37,8 @@ function App({ v, route: parent, state, stream }){
 			&& v('.menu'
 				, v('button', {
 					onclick(){
+						sounds().test.snd.play()
+						document.body.appendChild(sheet())
 						route( route.Game() )
 					}
 				}, 'Play')
@@ -50,6 +52,7 @@ function App({ v, route: parent, state, stream }){
 				,v('.hud'
 					, v('button', {
 						onclick(){
+							sounds().test.snd.play()
 							route( route.Menu() )
 						}
 					}, 'Menu')
