@@ -12,6 +12,7 @@ function deploy(){
     cp index.html ./dist/index.html
     cp -r web_modules ./dist/
     cp *.js ./dist/
+    cp -r services ./dist/
     cp -r snd ./dist
     cp -r sprites ./dist
 
