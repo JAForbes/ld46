@@ -17,4 +17,9 @@ function export-sprites(){
         --all-layers
 }
 
+function ...(){
+    export-sprites \
+    && git add -A && git commit -m "..." && git push
+}
+
 eval "$@"
