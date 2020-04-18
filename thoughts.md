@@ -86,7 +86,33 @@ The system to establish which tiles to render on screen is sort of ready to go. 
 
 I think I need to store the `title+layer+tag` that are currently rendering, irrespective of why, and when they started.  That way I can pick the correct frame.
 
-So I guess the first thing to do is figure out the unique set of title+layer+tag that has to render, and then check if they are already rendering.
+So I guess the first thing to do is figure out the unique set of `title+layer+tag` that has to render, and then check if they are already rendering.
 If they are resume, if not start.
 
 Same goes for sounds too I guess.
+
+##### 2020-04-28    21:13 PM
+
+Thinking about sounds now.  Sometimes you want a sound to repeat indefinitely, e.g. while moving with thrusters on.  Sometimes you want a sound to play intermittently, or repeat at a certain rate.  E.g. firing a cannon, you want to process the sound one time for every shot.
+
+So I'm wondering if the system that triggers sound for firing shots, is the same as the system for rendering images.
+
+And for the shot, it's kind of easier to set repeat false, and have a shot sprite that is just added to rendering, actions is Base and there's no tag filter.  Then when the image is created, the sound is created.
+
+For machine guns, there's no bullet.  It's more of a repeating effect, and at that point, yeah you probably want to just have a repeating shoot noise, it doesn't need to be synced up with a bullet firing.
+
+So I guess next steps would be, get a looping sound for thrusters, a looping sound for some kind of repeater gun / laser.  And a once off sound for a cannon.
+
+At that point I have images+sound.  Then I can either work on a dead simple menu, or the camera.
+
+I think for this game I need to have some AI that is basically, ships generally following a set path but they'll follow me if I get too far away from the path.  Ships can get damaged and then I need to cover them while they repair.  There can be more than 1 ship and one keeps moving while the other repairs, and maybe you need to fly near a ship to issue a stop command.
+
+Then there's also AI that is attacking me, and AI that is attacking the ships.
+
+By the end of the jam, if I can just get one level done, that would be amazing.  I think additional levels wouldn't be too hard once one level is done, so I'm happy at that point.  But if I don't have some half decent UI/screen shake/juice I don't really care if there's a lot of levels.
+
+There's also serialization.  I've been careful to separate serializable and non-serializable state.  E.g. canvases/images/sounds are stored separately to game state.  So I feel like a refresh shouldn't just completely restart the game, but, also, not a big deal for a 48 hour jam.
+
+While I was typing that I was thinking, repeat can be a rate.
+
+So for guns I can say, repeat every 100ms, if the sound effect takes 100ms, that's gapless playback.  Then I don't really want to know how long a sound goes for, so I can represent that as a ratio, e.g. repeating gaplessly could be 1, as in repeat every `duration * 1`, repeating never could be `0`.  Repeating ever 200ms could be `repeatRate: 2`.  That might seem confusing, but I think models what I need to model pretty simply.
