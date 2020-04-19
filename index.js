@@ -18,16 +18,16 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.classList.add( css.$animate(time, styles) )
 })
 
-const handleOrientation = () => {
-	if( window.screen.orientation.type.includes('portrait') ) {
-		document.body.classList.add('enable-rotate')
-	} else {
-		document.body.classList.remove('enable-rotate')
-	}
-}
-handleOrientation()
-window.onresize = handleOrientation
-window.addEventListener('orientationchange', handleOrientation)
+// const handleOrientation = () => {
+// 	if( window.innerWidth < window.innerHeight ) {
+// 		document.body.classList.add('enable-rotate')
+// 	} else {
+// 		document.body.classList.remove('enable-rotate')
+// 	}
+// }
+// handleOrientation()
+// window.onresize = handleOrientation
+// window.addEventListener('orientationchange', handleOrientation)
 
 // todo-james generate this later
 const shipRules = [
