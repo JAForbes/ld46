@@ -136,3 +136,7 @@ Couldn't sleep.  But had an idea for the story.  I feel a lot more motivated now
 The game is still basically a tech demo.  But I've learnt a lot.  Continuing on.
 
 I've got the sound systems, a camera system, the basic coordinates.  A lot of stuff actually.  Now I'm just thinking about control schemes.
+
+I can track the touch input and map it to a css var which rotates either a canvas, or a camera.  But I'm not sure how decoupled it should be.
+
+I'm thinking abstracting this too much is a mistake.  So maybe a stream that map gestures directly into the player coords/velocity.  I want to start building some gameplay soon.  But I'm also tempted to just keep checking off the hard parts.  I've made games before, so I'm more interested in this peripheral stuff I don't usually get time to play with e.g. menus.  I'm more excited in having a menu with a mute button than a game itself.
