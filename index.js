@@ -34,6 +34,7 @@ const handleOrientation = () => {
 // handleOrientation()
 window.onresize = handleOrientation
 window.addEventListener('orientationchange', handleOrientation)
+handleOrientation()
 
 // todo-james generate this later
 const shipRules = [
