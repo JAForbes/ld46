@@ -152,3 +152,15 @@ That's not the main issue either.  I need to be able to remove styles that are n
 I guess that leaves me with some kind of prefix...  okay solved that... except - I was thinking of using bss to generate the class names for the styles, so I can't prefix them.
 
 But that's ok, I can just store all the class names bss created on my behalf.
+
+#### 2020-04-20    07:08 AM
+
+Lost a lot of time last night trying to figure out a performance issue.  I tried to use the profiler and it wouldn't show any of my code running just a lot of empty microtasks with no stack.  It only happened if I wrote to a stream in a touch handler.  So I figured it was the code reacting to the streams that was slow.  Then I tried using `onkeydown` duplicating the touch code and dropping it in there - no issue.
+
+Literally the same process, somehow ran fine, 60fps.  So what gives?  
+
+On a hunch, I wondered if hammer.js just emits too fast.  If the events emit so fast that there's not enough frame budget left, requestAnimationFrame just won't run.  It's not synchronous, but it's basically synchronous because of the frequency.
+
+So I added some small change to my gestures service, basically buffering events and calling the visitor in a batch every frame.  And suddenly everything worked.
+
+Problem is there's only 3 or 4 hours left of the jam.  But wow did I learn a lot.
