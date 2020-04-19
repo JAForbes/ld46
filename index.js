@@ -283,8 +283,7 @@ function App({ v, route: parent, stream }){
 					top: 0px;
 					display: grid;
 					justify-content: center;
-					align-content: end;
-					padding-bottom: 2em;
+					align-content: center;
 				`
 				.desktop(`
 					background-size: contain;
@@ -326,6 +325,7 @@ function App({ v, route: parent, stream }){
 						background-color: #ffffff;
 						color: #d0423c;
 						border: solid 1px #ffc300;
+						margin-top: 5em;
 					`
 					.$active(
 						'opacity: 0.8;'
