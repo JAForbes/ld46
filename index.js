@@ -127,8 +127,8 @@ function App({ v, route: parent, stream }){
 	state.players = A.Z({ stream: stream.of({} )})
 	state.rules = A.Z({ stream: stream.of({} )})
 
-	relativeGesture.map( ({ theta }) =>
-		Object.keys(state.gestureControlled()).forEach( id => {
+	relativeGesture.map( ({ theta, type }) =>
+		Object.keys(state.gestureControlled()).filter( () => type == 'pan' ).forEach( id => {
 			if (id in state.particles()) {
 
 				const deg =
