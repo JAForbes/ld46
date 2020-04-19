@@ -37,7 +37,11 @@ export default function({ v, stream }){
 
     const handleOrientation = () => {
 
-        actual({ width: window.innerWidth, height: window.innerHeight })
+        actual({
+            width: window.innerWidth
+            , height: window.innerHeight
+            , rotation: window.screen.orientation.angle * Math.PI / 180
+        })
 
         try {
             if( window.innerWidth < window.innerHeight ) {
@@ -47,7 +51,7 @@ export default function({ v, stream }){
                     width: window.innerHeight,
                     height: window.innerWidth,
                     orientation: 'portrait',
-                    rotation: window.screen.orientation.angle * Math.PI / 180
+                    rotation: 0
                 })
                 v.redraw()
             } else {
@@ -56,8 +60,9 @@ export default function({ v, stream }){
                     width: window.innerWidth,
                     height: window.innerHeight,
                     orientation: 'landscape',
-                    rotation: window.screen.orientation.angle * Math.PI / 180
+                    rotation: 0
                 })
+
                 v.redraw()
             }
         } catch (e) {}

@@ -164,3 +164,7 @@ On a hunch, I wondered if hammer.js just emits too fast.  If the events emit so 
 So I added some small change to my gestures service, basically buffering events and calling the visitor in a batch every frame.  And suddenly everything worked.
 
 Problem is there's only 3 or 4 hours left of the jam.  But wow did I learn a lot.
+
+#### 2020-04-20    07:56 AM
+
+Spent some time getting the splash screen to only rotate on mobile, and making the start button always appear in view even if the mobile nav is taking up a lot of headroom when in landscape.
