@@ -11,6 +11,7 @@ function deploy(){
     rm -fr ./dist/*
 
     cp index.html ./dist/index.html
+    cp manifest.json ./dist/manifest.json
     cp -r web_modules ./dist/
     cp *.js ./dist/
     cp -r services ./dist/
