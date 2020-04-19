@@ -504,7 +504,7 @@ function Entity({ v, id, state }){
 				+ v.css`
 					width: 100%;
 					height: 100%;
-					background:  url('/assets/splash2.jpg');
+					background:  url('/assets/splash3.jpg');
 					background-size: cover;
 					opacity: 0;
 					position: absolute;
@@ -512,13 +512,19 @@ function Entity({ v, id, state }){
 					display: grid;
 					justify-content: center;
 					align-content: end;
-					padding: 1em;
+					padding-bottom: 20vh;
 				`
 				.$animate('ease-in forwards 2s', {
 					to: 'o 100'
 				})
 				,
-				{ key: 'splash', onclick: () => route( route.Menu() )
+				{ key: 'splash'
+				, onclick: () => {
+					document.body.requestFullscreen().finally(
+						() => route( route.Menu() )
+					)
+					// elem.requestFullscreen()
+				}
 				, hook: v.css.$animate.out('0.5s', {
 					from: 'o 100',
 					to: 'o 0'

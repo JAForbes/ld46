@@ -2,6 +2,7 @@
 
 function dev(){
     npx snowpack
+    export-sprites
     npx servor . index.html 8080
 }
 
@@ -39,6 +40,8 @@ function export-sprites(){
         --filename-format '{"layer": "{layer}", "tag": "{tag}", "title": "{title}", "frameNumber": {frame1}}' \
         --format json-array \
         --all-layers
+
+    cp ./sprites/splash3.jpg ./assets/splash3.jpg
 }
 
 function ...(){
