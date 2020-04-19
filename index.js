@@ -5,6 +5,7 @@ import gestures from './gestures.js'
 
 import metadataService from './services/metdata.js'
 import soundsClickService from './services/sound.js'
+import landscapeService from './services/landscape.js'
 
 const A = V.A
 const css = V.css
@@ -17,24 +18,6 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.addEventListener('animationend', res, { once: true })
 	dom.classList.add( css.$animate(time, styles) )
 })
-
-let err
-const handleOrientation = () => {
-	err = null
-	try {
-		if( window.innerWidth < window.innerHeight ) {
-			document.body.classList.add('enable-rotate')
-		} else {
-			document.body.classList.remove('enable-rotate')
-		}
-	} catch (e) {
-		err = e
-	}
-}
-// handleOrientation()
-window.onresize = handleOrientation
-window.addEventListener('orientationchange', handleOrientation)
-handleOrientation()
 
 // todo-james generate this later
 const shipRules = [
@@ -444,6 +427,7 @@ function App({ v, route: parent, state, stream }){
 	soundsClickService({ v, route, state, sounds })
 	metadataService({ v, route, sheet, state })
 	actionService({ canvases, sounds, playing, state, route, sheet })
+	landscapeService({ v })
 
 	gestures(document.body, x => {
 		state.lastGesture(x)
@@ -520,12 +504,6 @@ function Entity({ v, id, state }){
 						route( route.Game() )
 					}
 				}, 'Play')
-				, v('p', 'width ', window.innerWidth)
-				, v('p', 'height ', window.innerHeight)
-				, v('button', { onclick: () => handleOrientation() }, 'Handle Orientation')
-				, v('p', 'orientation type ', window.screen.orientation.type )
-				, v('p', 'body classlist', [...document.body.classList].join(' '))
-				, v('p', 'error', err && err.message )
 			)
 		, route.isClick( route() ) &&
 			v('.splash'
