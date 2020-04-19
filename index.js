@@ -179,7 +179,7 @@ function App({ v, route: parent, stream }){
 						({ start, end }) => deg > start && deg <= end
 					)
 					.x
-
+P
 				const actions = state.actors[id].actions() || {}
 
 				const oldTime = actions[action] || Date.now()
@@ -276,9 +276,7 @@ function App({ v, route: parent, stream }){
 					width: var(--viewport-width);
 					height: var(--viewport-height);
 					background:  url('/assets/splash3.jpg');
-					background-size: contain;
-					background-position: center;
-					background-repeat: no-repeat;
+					background-size: cover;
 					opacity: 0;
 					position: absolute;
 					top: 0px;
@@ -287,6 +285,11 @@ function App({ v, route: parent, stream }){
 					align-content: end;
 					padding-bottom: 2em;
 				`
+				.desktop(`
+					background-size: contain;
+					background-position: center;
+					background-repeat: no-repeat;`
+				)
 				.$animate('ease-in forwards 2s', {
 					to: 'o 100'
 				})
