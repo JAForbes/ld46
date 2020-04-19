@@ -20,15 +20,15 @@ export default async function({xs, v}){
             snd.addEventListener('canplay', () => {
                 const oldVolume = snd.volume
                 snd.volume = 0
-                snd.play().then(
-                    () => {
-                        snd.pause()
-                        snd.currentTime = 0
-                        snd.volume = oldVolume
-                        Y(snd)
-                    }
-                    , N
-                )
+                // snd.play().then(
+                //     () => {
+                snd.pause()
+                snd.currentTime = 0
+                snd.volume = oldVolume
+                Y(snd)
+                    // }
+                    // , N
+                // )
             }, { once: true })
             snd.src = path
         })

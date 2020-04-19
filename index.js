@@ -424,8 +424,15 @@ function App({ v, route: parent, state, stream }){
 
 	Object.assign(window, { state, sheet, sounds, route, canvases, v })
 
-	soundsClickService({ v, route, state, sounds })
+
 	metadataService({ v, route, sheet, state })
+		.then(
+			() => soundsClickService({ v, route, state, sounds })
+		)
+		.then(
+			() => route( route.Click() )
+		)
+
 	actionService({ canvases, sounds, playing, state, route, sheet })
 	landscapeService({ v })
 
@@ -463,31 +470,30 @@ function App({ v, route: parent, state, stream }){
 	A.stream.dropRepeats(route.tag.$stream)
 		.map( () => v.redraw() )
 
-function Entity({ v, id, state }){
-	const dimensions =
-		state.dimensions()[id] || { x: 32, y: 32 }
+	function Entity({ v, id, state }){
+		const dimensions =
+			state.dimensions()[id] || { x: 32, y: 32 }
 
-	return () =>
-		v('canvas.entity'
-			+ v.css`
-				position: absolute;
-				top: 0px;
-				left: 0px;
-			`
-			,
-			{ id: id()
-			, key: id()
-			, width: dimensions.x
-			, height: dimensions.y
-			, hook: ({ dom }) => {
-				canvases(
-					({ [id()]: dom.getContext('2d') })
-				)
-			}
+		return () =>
+			v('canvas.entity'
+				+ v.css`
+					position: absolute;
+					top: 0px;
+					left: 0px;
+				`
+				,
+				{ id: id()
+				, key: id()
+				, width: dimensions.x
+				, height: dimensions.y
+				, hook: ({ dom }) => {
+					canvases(
+						({ [id()]: dom.getContext('2d') })
+					)
+				}
 
-	})
-}
-	setInterval( () => v.redraw(), 5000)
+		})
+	}
 
 	return () => console.log('render') || v('.app'
 		+ v.css`

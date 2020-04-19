@@ -7,31 +7,29 @@ export default function soundsClickService({
 	route, state, v, sounds
 }){
 
-	wait()
-	.then(onAllowed)
+	let soundsEmpty = true
 
-	function wait(){
-		return new Promise( Y => {
-			const ours = state.lastGesture.$stream.map( x => x)
-			A.run(
-				ours
-				, A.stream.filter(
-					x => x
-						&& x.type == 'tap'
-						&& (
-							route.isClick( route() )
-						)
-				)
-				, A.stream.dropRepeats
-				, A.stream.map(() => {
-					ours.end(true)
-					Y()
-				})
-			)
-		})
-	}
+	// function wait(){
+	// 	return new Promise( Y => {
+	// 		const ours = state.lastGesture.$stream.map( x => x)
+	// 		A.run(
+	// 			ours
+	// 			, A.stream.filter(
+	// 				x => x
+	// 					&& x.type == 'tap'
+	// 					&& soundsEmpty
+	// 			)
+	// 			, A.stream.dropRepeats
+	// 			, A.stream.map(() => {
+	// 				ours.end(true)
+	// 				Y()
+	// 			})
+	// 		)
+	// 	})
+	// }
 
 	async function onAllowed(){
+		soundsEmpty = false
 		const xs = state.soundJSON().sounds
 		const results = await Loader({
 			xs: xs.map( x => x.src )
@@ -46,4 +44,8 @@ export default function soundsClickService({
 		)
 		sounds(external)
 	}
+
+
+	return Promise.resolve() //  wait()
+		.then(onAllowed)
 }

@@ -2,7 +2,7 @@ import Loader from '../loader.js'
 import * as R from '../web_modules/ramda.js'
 
 export default function metadataService({ v, sheet, state, route }){
-	Loader({
+	return Loader({
 		xs: [
 			'/assets/frames.json',
 			'/assets/sheet.png',
@@ -28,8 +28,6 @@ export default function metadataService({ v, sheet, state, route }){
 			state.framesIndexed( f( state.frames() ) )
 
 			state.soundJSON(sounds)
-
-			route( route.Click() )
 		}
 	)
 }
