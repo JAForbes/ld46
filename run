@@ -17,7 +17,6 @@ function deploy(){
     cp -r services ./dist/
     cp -r assets ./dist/
     cp -r snd ./dist
-    cp -r sprites ./dist
 
     pushd dist
         aws s3 sync . s3://ld46.james-forbes.com --profile admin

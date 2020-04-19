@@ -9,6 +9,8 @@ import soundsClickService from './services/sound.js'
 const A = V.A
 const css = V.css
 
+const isMobile = window.matchMedia('(max-width: 600px)').matches
+
 
 css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.addEventListener('animationend', res, { once: true })
@@ -512,7 +514,7 @@ function Entity({ v, id, state }){
 					display: grid;
 					justify-content: center;
 					align-content: end;
-					padding-bottom: 20vh;
+					padding-bottom: 2em;
 				`
 				.$animate('ease-in forwards 2s', {
 					to: 'o 100'
@@ -520,10 +522,13 @@ function Entity({ v, id, state }){
 				,
 				{ key: 'splash'
 				, onclick: () => {
-					document.body.requestFullscreen().finally(
-						() => route( route.Menu() )
-					)
-					// elem.requestFullscreen()
+					if( isMobile ) {
+						document.body.requestFullscreen().finally(
+							() => route( route.Menu() )
+						)
+					} else {
+						route(route.Menu())
+					}
 				}
 				, hook: v.css.$animate.out('0.5s', {
 					from: 'o 100',
