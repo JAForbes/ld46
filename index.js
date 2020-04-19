@@ -82,6 +82,9 @@ function App({ v, route: parent, state, stream }){
 			y: x.center.x - halfDimensions().width
 		}
 	)
+	.map(
+		({ type, x, y }) => ({ type, x, y, theta: Math.atan2(y,x) + Math.PI / 2 })
+	)
 	.map( relativeGesture )
 
 	Object.assign(window, {
@@ -100,6 +103,7 @@ function App({ v, route: parent, state, stream }){
 			if( route.isGame(route())) {
 				state.players[1](true)
 				state.rules[1]( shipData.rules )
+				state.gestureControlled[1](true)
 				state.rendering[1]({})
 				state.actors[1]({
 					// these actions current apply to entity 1
@@ -231,18 +235,27 @@ function App({ v, route: parent, state, stream }){
 					top: 0px;
 					left: 0px;
 					width: var(--viewport-width);
-    				height: var(--viewport-height);
+					height: var(--viewport-height);
+					transform-style: preserve-3d;
+					perspective: 1000px;
 				`
 				, { key: 'game' }
-				,v('.sprites'
+				, v('.camera'
 					+ v.css`
-						position: absolute;
-						top: 0px;
-						left: 0px;
-						transform: translate( calc( 0.5 * var(--viewport-width, 100vw) ), calc(0.5 * var(--viewport-height, 100vh)) ) scale(4);
+						bc purple
+						transform: scale(-1,-1) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) scale(-1,-1) scale(var(--scale, 1));
+    					transition: 1s;
 					`
-					,Object.keys(state().rendering).map(
-						id => v(Entity, { id, state, canvases })
+					,v('.sprites'
+						+ v.css`
+							position: absolute;
+							top: 0px;
+							left: 0px;
+							transform: translate( calc( 0.5 * var(--viewport-width, 100vw) ), calc(0.5 * var(--viewport-height, 100vh)) );
+						`
+						,Object.keys(state().rendering).map(
+							id => v(Entity, { id, state, canvases })
+						)
 					)
 				)
 				,v('.hud'
