@@ -21,12 +21,16 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.classList.add( css.$animate(time, styles) )
 })
 
+window.oncontextmenu = e => e.preventDefault()
+
 function App({ v, route: parent, state, stream }){
 
 	const sheet = stream()
 	const sounds = stream()
 	const canvases = stream({})
 	const playing = A.Z({ stream: stream() })
+
+	const lastGesture = stream()
 
 	if( window.location.pathname != "/" ) {
 		window.location.pathname = "/"
@@ -41,9 +45,6 @@ function App({ v, route: parent, state, stream }){
 		replace: true
 	})
 
-	Object.assign(window, { state, sheet, sounds, route, canvases, v })
-
-
 	metadataService({ v, route, sheet, state })
 		.then(
 			() => soundsClickService({ v, route, state, sounds })
@@ -52,13 +53,40 @@ function App({ v, route: parent, state, stream }){
 			() => route( route.Click() )
 		)
 
-	actionService({ canvases, sounds, playing, state, route, sheet })
-	landscapeService({ v })
+	const dimensions = landscapeService({ v, stream })
+
+	actionService({
+		canvases, sounds, playing, state, route, sheet
+	})
 
 	gestures(document.body, x => {
-		state.lastGesture(x)
-		x.preventDefault()
-		// v.redraw()
+		lastGesture(x)
+	})
+
+	const relativeGesture = stream()
+	const halfDimensions = dimensions.actual.map(
+		({ width, height }) => ({ width: width / 2, height: height / 2 })
+	)
+
+	lastGesture.map( x =>
+		(dimensions.actual().orientation == 'landscape' || true)
+		? {
+			type: x.type,
+			x: x.center.x - halfDimensions().width
+			, y: x.center.y - halfDimensions().height,
+
+		}
+		: {
+			type: x.type,
+			x: x.center.y - halfDimensions().height,
+			y: x.center.x - halfDimensions().width
+		}
+	)
+	.map( relativeGesture )
+
+	Object.assign(window, {
+		state, sheet, sounds, route, canvases, v, lastGesture,
+		dimensions, relativeGesture
 	})
 
 	state.muted(true)
@@ -222,6 +250,7 @@ function App({ v, route: parent, state, stream }){
 						onclick(){
 							sounds().test.snd.play()
 							route( route.Menu() )
+							// v.redraw()
 						}
 					}, 'Menu')
 				)
