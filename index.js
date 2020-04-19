@@ -9,6 +9,12 @@ import soundsClickService from './services/sound.js'
 const A = V.A
 const css = V.css
 
+
+css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
+	dom.addEventListener('animationend', res, { once: true })
+	dom.classList.add( css.$animate(time, styles) )
+})
+
 // todo-james generate this later
 const shipRules = [
 	{
@@ -424,7 +430,7 @@ function App({ v, route: parent, state, stream }){
 		// v.redraw()
 	})
 
-	state.muted(false)
+	state.muted(true)
 	state.rendering({})
 	playing[1]({})
 	state.dimensions({})
@@ -478,9 +484,14 @@ function Entity({ v, id, state }){
 }
 
 	return () => console.log('render') || v('.app'
-		, route.isLoading( route() ) && v('p', 'Loading')
-		, route.isMenu( route() )
+		+ v.css`
+			height: 100%;
+		`
+		,
+		[ route.isMenu( route() )
 			&& v('.menu'
+				,
+				{ key: 'menu' }
 				, v('button', {
 					onclick(){
 						sounds().test.snd.play()
@@ -488,9 +499,59 @@ function Entity({ v, id, state }){
 					}
 				}, 'Play')
 			)
-		, route.isClick( route() ) && v('p', 'Click')
+		, route.isClick( route() ) &&
+			v('.splash'
+				+ v.css`
+					width: 100%;
+					height: 100%;
+					background:  url('/assets/splash2.jpg');
+					background-size: cover;
+					opacity: 0;
+					position: absolute;
+					top: 0px;
+					display: grid;
+					justify-content: center;
+					align-content: end;
+					padding: 1em;
+				`
+				.$animate('ease-in forwards 2s', {
+					to: 'o 100'
+				})
+				,
+				{ key: 'splash', onclick: () => route( route.Menu() )
+				, hook: v.css.$animate.out('0.5s', {
+					from: 'o 100',
+					to: 'o 0'
+				})
+				}
+				, v('div'
+					+ v.css`
+						display: grid;
+						justify-content: center;
+
+						font-size: 2em;
+						letter-spacing: 10px;
+						padding: 0.5em 10px;
+						padding-left: 20px;
+
+						box-shadow: inset 0px 3px 4px 1px rgba(245, 73, 73, 0.5), inset -3px -9px 10px 1px rgba(0,0,0,0.5), inset 0px 0px 0px 1px rgba(0,0,0,0.5);
+						border-radius: 0.25em;
+						background-color: #ffffff;
+						color: #d0423c;
+						border: solid 1px #ffc300;
+					`
+					.$active(
+						'opacity: 0.8;'
+					)
+					.$hover(`
+						opacity: 0.9;
+					`)
+					, 'START'
+				)
+			)
 		, route.isGame( route() )
 			&& v('.game'
+				, { key: 'game' }
 				,v('.sprites'
 					,v('p', 'Game')
 					,Object.keys(state().rendering).map(
@@ -506,6 +567,9 @@ function Entity({ v, id, state }){
 					}, 'Menu')
 				)
 			)
+		]
+		// why...
+		.filter(Boolean)
 	)
 }
 

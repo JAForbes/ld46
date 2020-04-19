@@ -45,6 +45,5 @@ export default function soundsClickService({
 			}
 		)
 		sounds(external)
-		route( route.Menu() )
 	}
 }
