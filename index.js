@@ -9,7 +9,8 @@ import soundsClickService from './services/sound.js'
 const A = V.A
 const css = V.css
 
-const isMobile = window.matchMedia('(max-width: 600px)').matches
+const isMobile =
+	window.matchMedia('(max-width: 600px)').matches
 
 
 css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
@@ -524,14 +525,6 @@ function Entity({ v, id, state }){
 				, onclick: () => {
 					if( isMobile ) {
 						document.body.requestFullscreen()
-						.then( () => {
-							try {
-								screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation
-								screen.lockOrientationUniversal('landscape')
-							} catch (e) {
-								console.error('could not lock orientation')
-							}
-						})
 						.finally(
 							() => route( route.Menu() )
 						)
