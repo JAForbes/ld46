@@ -18,11 +18,18 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.classList.add( css.$animate(time, styles) )
 })
 
+let err
 const handleOrientation = () => {
-	if( window.innerWidth < window.innerHeight ) {
-		document.body.classList.add('enable-rotate')
-	} else {
-		document.body.classList.remove('enable-rotate')
+	err = null
+	try {
+		if( window.innerWidth < window.innerHeight ) {
+			document.body.classList.add('enable-rotate')
+		} else {
+			document.body.classList.remove('enable-rotate')
+		}
+	} catch (e) {
+		err = e
+		v.redraw()
 	}
 }
 // handleOrientation()
@@ -517,6 +524,7 @@ function Entity({ v, id, state }){
 				, v('p', 'height ', window.innerHeight)
 				, v('button', { onclick: () => handleOrientation() }, 'Handle Orientation')
 				, v('p', 'orientation type ', window.screen.orientation.type )
+				, v('p', 'body classlist', [...document.body.classList].join(' '))
 			)
 		, route.isClick( route() ) &&
 			v('.splash'
