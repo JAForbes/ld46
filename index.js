@@ -55,8 +55,10 @@ function App({ v, route: parent, state, stream }){
 
 	const dimensions = landscapeService({ v, stream })
 
+	const raf = A.stream.raf()
+
 	actionService({
-		canvases, sounds, playing, state, route, sheet
+		canvases, sounds, playing, state, route, sheet, raf
 	})
 
 	gestures(document.body, x => {
@@ -97,6 +99,20 @@ function App({ v, route: parent, state, stream }){
 	playing[1]({})
 	state.dimensions({})
 	state.actors({})
+	state.gestureControlled({})
+
+
+	relativeGesture.map( ({ theta, x, y }) =>
+		Object.keys(state.gestureControlled()).filter( id => {
+			return canvases()[id]
+		})
+		.forEach( id => {
+			const context = canvases()[id]
+			const canvas = context.canvas
+
+			canvas.style.setProperty('--rotation', theta+'rad')
+		})
+	)
 
 	A.stream.dropRepeats(route.$stream.map( x => x.tag )).map(
 		() => {
@@ -117,6 +133,7 @@ function App({ v, route: parent, state, stream }){
 			}
 		}
 	)
+
 
 	A.stream.dropRepeats(route.tag.$stream)
 		.map( () => v.redraw() )

@@ -16,7 +16,7 @@ Got a basic export process going for aseprite.  Looks like an amazing tool actua
 
 My process I think will be to use that tool as much as possible and make the game code just trust whatever metadata is there.  This is the opposite to what I normally do.
 
-##### 2020-04-28    11:47 AM
+##### 2020-04-18    11:47 AM
 
 I've just been watching some tutorials for the sprite app.  And thinking of ideas while havig a coffee or two.  The theme is "keep it alive".  I initially thought of a game where you're protecting an egg from dinosaurs and while you carry the egg you can't attack.
 
@@ -28,7 +28,7 @@ Also a space game would probably have a lot of UI, e.g. upgrading weapons/hulls,
 
 I might change my mind soon, who knows.  I really just want to get a basic workflow with this sprite app going so I can mess around with art assets instead of code when I'm really tired tomorrow.
 
-##### 2020-04-28    12:14 PM
+##### 2020-04-18    12:14 PM
 
 I was thinking I'd have multiple characters/assets in a single aseprite project so I'd only load one sprite sheet.  But it looks like that's not how the software is designed.  So I'll need some process for the JS to know what sprite sheets to load, and what data to load.  Maybe it's all manual but I'd really like this game to be asset driven, so if there's a new asset, it's automatically available.  So if I can get my export script to export multiple projects that'd be amazing.  Oh maybe I'm misunderstanding the export script.  maybe you have separate .aseprite files but you can do a single export with multiple files.  I need to re-read the docs.
 
@@ -50,7 +50,7 @@ Because I'm using github pages, I need to check in all these built files.  But t
 I think for now, I'll check in the frames.json + sheet.png.  And revisit this later...
 
 
-##### 2020-04-28    12:14 PM
+##### 2020-04-18    12:14 PM
 
 I think I want this game to work with just mouse or touch.  I'll probably add keyboard support as a stretch goal, but I've done that so many times before.
 
@@ -58,13 +58,13 @@ So I'm going to fiddle with hammerjs a bit, and see if I can get an animated spr
 
 I've got a vague idea what I want the game to be, but if I can get things feeling nice that's a huge start.
 
-##### 2020-04-28    2:27 PM
+##### 2020-04-18    2:27 PM
 
 I've got hammer working ok.  Took me a while to figure out the API.  The docs are super confusing but the examples make it pretty clear.
 
 Right now I'm looking into menu/ui states.  I feel pretty confident just building some kind of game thing, but getting the UI transitions feeling nice is new for me in a game.  I'm testing on a phone, making sure I can get audio playing and such.  I'm considering forcing people to pin to desktop so the toolbar can be hidden constantly.  I know that's seen as bad practice but that's going to get super annoying when playing.
 
-##### 2020-04-28    3:54 PM
+##### 2020-04-18    3:54 PM
 
 Sounds/Metadata/Images are now loading and there's some basic routing between pages based on game state.  It's just a black screen with some default buttons and images and at 4pm that feels really bad, but considering it's only actually been 5 hours out of 48, it's okay.  There's still 43 to go.  And these are the sort of things that really bothered me in previous entries.  Can probably serve as a bit of a template for future jams.
 
@@ -80,7 +80,7 @@ Just walked around a bit and though about that.  I don't think aseprite's data m
 
 Different types of weapons could be doable, but not sure if I'll bother in the jam.  It'd be a different project file.
 
-##### 2020-04-28    20:01 PM
+##### 2020-04-18    20:01 PM
 
 The system to establish which tiles to render on screen is sort of ready to go.  But I don't want to accidentally reset an animation by presuming that just because the particular condition that triggered a cycle just started, that a separate cycle hadn't also just ended that used the same animation.
 
@@ -91,7 +91,7 @@ If they are resume, if not start.
 
 Same goes for sounds too I guess.
 
-##### 2020-04-28    21:13 PM
+##### 2020-04-18    21:13 PM
 
 Thinking about sounds now.  Sometimes you want a sound to repeat indefinitely, e.g. while moving with thrusters on.  Sometimes you want a sound to play intermittently, or repeat at a certain rate.  E.g. firing a cannon, you want to process the sound one time for every shot.
 
@@ -117,7 +117,7 @@ While I was typing that I was thinking, repeat can be a rate.
 
 So for guns I can say, repeat every 100ms, if the sound effect takes 100ms, that's gapless playback.  Then I don't really want to know how long a sound goes for, so I can represent that as a ratio, e.g. repeating gaplessly could be 1, as in repeat every `duration * 1`, repeating never could be `0`.  Repeating ever 200ms could be `repeatRate: 2`.  That might seem confusing, but I think models what I need to model pretty simply.
 
-##### 2020-04-28    23:37 PM
+##### 2020-04-18    23:37 PM
 
 Took a break for an hour, then came back and just generated a bunch of sounds.  My brain wasn't ready for code.  It felt good even though I know I was procrastinating.  At this point my game is just a single repeating sprite, but there's a lot of potential in this system once I start iterating on art.  I might give the code a break and just art it up tomorrow morning.
 
@@ -127,6 +127,12 @@ I might have a 2-3 hour sleep.  Wake up at 2-3 am and just do some art.  We'll s
 
 Also was thinking of names.  The best I came up with so far was convoyage.  As in "bon voyage" as "convoy" as a kind of tongue in cheek name implying the convoy's your protecting aren't likely to survive.
 
-##### 2020-04-29    02:11 AM
+##### 2020-04-19    02:11 AM
 
 Couldn't sleep.  But had an idea for the story.  I feel a lot more motivated now.  To get the story done, I need to make 3 levels/scenarios, some kind of dialog system, some avatars for different roles/characters in the game, some end state splash screens and then yeah the menu.  Maybe doable, maybe not.  If I don't finish before the deadline I'll probably finish it some other time.  Gonna try and get some sleep again.
+
+##### 2020-04-19    02:11 AM
+
+The game is still basically a tech demo.  But I've learnt a lot.  Continuing on.
+
+I've got the sound systems, a camera system, the basic coordinates.  A lot of stuff actually.  Now I'm just thinking about control schemes.

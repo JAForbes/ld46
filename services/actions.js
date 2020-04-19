@@ -1,9 +1,7 @@
 import V from '../web_modules/attain/lib/view.js'
 import * as R from '../web_modules/ramda.js'
 
-const A = V.A
-
-export default function actions({ canvases, playing: Playing, sounds, state, route, sheet }){
+export default function actions({ canvases, playing: Playing, sounds, state, route, sheet, raf }){
 
 	function renderCanvas(id){
 		/**
@@ -114,7 +112,7 @@ export default function actions({ canvases, playing: Playing, sounds, state, rou
 		state.rendering[id]( rendering )
 	}
 
-	A.stream.raf().map(
+	raf.map(
 		() => {
 			if( route.isGame(route()) ) {
 				Object.keys(canvases()).map(renderCanvas)
