@@ -17,8 +17,6 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.classList.add( css.$animate(time, styles) )
 })
 
-screen.lockOrientation('landscape')
-
 // todo-james generate this later
 const shipRules = [
 	{
