@@ -539,7 +539,7 @@ function Entity({ v, id, state }){
 				{ key: 'splash'
 				, onclick: () => {
 					if( isMobile ) {
-						document.requestFullscreen()
+						document.documentElement.requestFullscreen()
 						.finally(
 							() => route( route.Menu() )
 						)
