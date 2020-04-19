@@ -1,7 +1,8 @@
 import H from './web_modules/hammerjs.js'
 
-export default function gestures(container, visitor){
-	const mc = new H(document.body)
+export default function gestures({ container, stream }){
+	const mc = new H(container)
+	const out = stream.of()
 
 	const buffer = []
 	mc.on("press swipe pan pinchstart pinch pinchend", e => {
@@ -20,12 +21,12 @@ export default function gestures(container, visitor){
 
 	function loop(){
 
-		buffer.forEach( x => visitor(x) )
+		buffer.forEach( x => out(x) )
 		buffer.length = 0
 
 		requestAnimationFrame( loop )
 	}
 
 	loop()
-	return mc
+	return out
 }

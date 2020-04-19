@@ -6,6 +6,7 @@ import metadataService from './services/metdata.js'
 import soundsClickService from './services/sound.js'
 import landscapeService from './services/landscape.js'
 import actionService from './services/actions.js'
+import relativeGestureService from './services/relativeGestures.js'
 
 import * as shipData from './data/ship.js'
 
@@ -15,47 +16,12 @@ const css = V.css
 const isMobile =
 	Math.min( window.innerHeight, window.innerWidth ) < 600
 
-
 css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.addEventListener('animationend', res, { once: true })
 	dom.classList.add( css.$animate(time, styles) )
 })
 
 window.oncontextmenu = e => e.preventDefault()
-
-function relativeGestureService({ stream, screenDimensions, gesture }){
-
-	const relativeGesture = stream.of()
-	const halfDimensions = screenDimensions.actual.map(
-		({ width, height }) => ({ width: width / 2, height: height / 2 })
-	)
-
-	gesture.map( x =>
-		(screenDimensions.actual().orientation == 'landscape' || true)
-		? {
-			type: x.type
-			, x: x.center.x - halfDimensions().width
-			, y: x.center.y - halfDimensions().height
-			, scale: x.scale
-
-		}
-		: {
-			type: x.type
-			,x: x.center.y - halfDimensions().height
-			,y: x.center.x - halfDimensions().width
-			, scale: x.scale
-		}
-	)
-	.map(
-		({ type, x, y, scale }) => ({
-			type, x, y, scale, theta:
-				(Math.atan2(y,x) + Math.PI / 2)
-		})
-	)
-	.map( relativeGesture )
-
-	return relativeGesture
-}
 
 function App({ v, route: parent, stream }){
 
@@ -66,8 +32,6 @@ function App({ v, route: parent, stream }){
 	const sounds = stream()
 	const canvases = stream({})
 	const playing = A.Z({ stream: stream() })
-
-	const lastGesture = stream()
 
 	if( window.location.pathname != "/" ) {
 		window.location.pathname = "/"
@@ -98,9 +62,8 @@ function App({ v, route: parent, stream }){
 		canvases, sounds, playing, state, route, sheet, raf
 	})
 
-	gestures(document.body, x => {
-		lastGesture(x)
-	})
+	const lastGesture =
+		gestures({ container: document.body, stream })
 
 	const relativeGesture = relativeGestureService({
 		stream, screenDimensions, gesture: lastGesture
