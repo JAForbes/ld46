@@ -73,21 +73,63 @@ function App({ v, route: parent, state, stream }){
 	lastGesture.map( x =>
 		(dimensions.actual().orientation == 'landscape' || true)
 		? {
-			type: x.type,
-			x: x.center.x - halfDimensions().width
-			, y: x.center.y - halfDimensions().height,
+			type: x.type
+			, x: x.center.x - halfDimensions().width
+			, y: x.center.y - halfDimensions().height
+			, scale: x.scale
 
 		}
 		: {
-			type: x.type,
-			x: x.center.y - halfDimensions().height,
-			y: x.center.x - halfDimensions().width
+			type: x.type
+			,x: x.center.y - halfDimensions().height
+			,y: x.center.x - halfDimensions().width
+			, scale: x.scale
 		}
 	)
 	.map(
-		({ type, x, y }) => ({ type, x, y, theta: Math.atan2(y,x) + Math.PI / 2 })
+		({ type, x, y, scale }) => ({ type, x, y, scale, theta: Math.atan2(y,x) + Math.PI / 2 })
 	)
 	.map( relativeGesture )
+
+	const cameraEl = A.stream.of()
+	const cameraScale = A.stream.of(1)
+
+	function pinchScale(lastGesture){
+		const out = A.stream.of()
+		let prevPinchScale = 1
+		let pinchScaleDelta = 1
+
+		lastGesture.map( x => {
+
+			if( x.type == 'pinch' ) {
+				pinchScaleDelta = (prevPinchScale - x.scale) * -1
+				prevPinchScale = x.scale
+				out(pinchScaleDelta)
+			}
+			if(x.type.includes('pinchend')){
+				prevPinchScale = 1
+			}
+		})
+		return out
+	}
+
+	A.stream.merge([
+		pinchScale (relativeGesture),
+		cameraEl
+	])
+		.map(
+			([scale, el]) => {
+				const old = cameraScale()
+
+				const MIN_SCALE = 1
+				const MAX_SCALE = 10
+
+				const newScale = Math.max(MIN_SCALE, Math.min( MAX_SCALE, ( old + scale ) ))
+
+				el.style.setProperty('--scale', newScale)
+				cameraScale(newScale)
+			}
+		)
 
 	Object.assign(window, {
 		state, sheet, sounds, route, canvases, v, lastGesture,
@@ -259,10 +301,13 @@ function App({ v, route: parent, state, stream }){
 				, { key: 'game' }
 				, v('.camera'
 					+ v.css`
-						bc purple
+						width: var(--viewport-width);
+						height: var(--viewport-height);
 						transform: scale(-1,-1) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) scale(-1,-1) scale(var(--scale, 1));
     					transition: 1s;
 					`
+					,
+					{ hook: ({ dom }) => cameraEl(dom) }
 					,v('.sprites'
 						+ v.css`
 							position: absolute;
