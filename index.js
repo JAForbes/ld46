@@ -127,7 +127,7 @@ function App({ v, route: parent, stream }){
 	state.players = A.Z({ stream: stream.of({} )})
 	state.rules = A.Z({ stream: stream.of({} )})
 
-	relativeGesture.map( ({ theta, type }) =>
+	relativeGesture.map( ({ type }) =>
 		Object.keys(state.gestureControlled()).forEach( id => {
 			if ( type == 'panstart' ) {
 				state.actors[id].actions.moving(Date.now())
@@ -136,7 +136,31 @@ function App({ v, route: parent, stream }){
 			}
 		})
 	)
-	relativeGesture.map( ({ theta, type }) =>
+
+	const relativePan =
+		A.stream.filter( x => x.type == 'pan' ) (relativeGesture)
+
+
+	const panDistanceFromCenter =
+		relativePan.map( ({ x, y }) => {
+			return Math.sqrt( x ** 2 + y ** 2 )
+		})
+
+	A.stream.filter( x => x.type == 'panend' ) ( relativeGesture )
+		.map( () => panDistanceFromCenter(Infinity) )
+
+	A.stream.dropRepeats(panDistanceFromCenter.map( x => x < 100  ))
+		.map(
+			firing => Object.keys(state.gestureControlled() ).forEach( id => {
+				if( firing ) {
+					state.actors[id].actions.firing( Date.now() )
+				} else {
+					state.actors[id].actions.firing.$delete()
+				}
+			})
+		)
+
+	relativePan.map( ({ theta, type }) =>
 		Object.keys(state.gestureControlled()).filter( () => type == 'pan' ).forEach( id => {
 			if (id in state.particles()) {
 
@@ -338,7 +362,7 @@ function App({ v, route: parent, stream }){
 						width: 0px;
 						height: 0px;
 						transform: translate(calc( var(--viewport-width) * 0.5), calc( var(--viewport-height) * 0.5 )) scale(-1,-1) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) scale(-1,-1) scale(var(--scale, 1));
-    					transition: 1s;
+						transition: 1s;
 					`
 					,
 					{ hook: ({ dom }) => cameraEl(dom) }
