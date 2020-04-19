@@ -114,7 +114,7 @@ function App({ v, route: parent, stream }){
 		screenDimensions, relativeGesture
 	})
 
-	state.muted = stream.of()
+	state.muted = stream.of(false)
 	state.rendering = A.Z({ stream: stream.of({}) })
 	playing[1]({})
 	state.frames = A.Z({ stream: stream.of({} )})
@@ -127,6 +127,15 @@ function App({ v, route: parent, stream }){
 	state.players = A.Z({ stream: stream.of({} )})
 	state.rules = A.Z({ stream: stream.of({} )})
 
+	relativeGesture.map( ({ theta, type }) =>
+		Object.keys(state.gestureControlled()).forEach( id => {
+			if ( type == 'panstart' ) {
+				state.actors[id].actions.moving(Date.now())
+			} else if ( type == 'panend' ) {
+				state.actors[id].actions.moving.$delete()
+			}
+		})
+	)
 	relativeGesture.map( ({ theta, type }) =>
 		Object.keys(state.gestureControlled()).filter( () => type == 'pan' ).forEach( id => {
 			if (id in state.particles()) {

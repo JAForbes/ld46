@@ -5,7 +5,7 @@ export default function gestures({ container, stream }){
 	const out = stream.of()
 
 	const buffer = []
-	mc.on("press swipe pan pinchstart pinch pinchend", e => {
+	mc.on("press swipe pan panstart panend pinchstart pinch pinchend", e => {
 		buffer.push({ ...e, time: Date.now() })
 	})
 
@@ -16,7 +16,7 @@ export default function gestures({ container, stream }){
 
 	// faster than a tap
 	window.addEventListener('click', e => {
-		buffer.push({ type: 'click', center: { x: e.x, y: e.y }, ...e, time: Date.now() })
+		buffer.push({ type: 'tap', center: { x: e.x, y: e.y }, ...e, time: Date.now() })
 	})
 
 	function loop(){
