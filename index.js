@@ -17,6 +17,8 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.classList.add( css.$animate(time, styles) )
 })
 
+screen.lockOrientation('landscape')
+
 // todo-james generate this later
 const shipRules = [
 	{
@@ -523,7 +525,16 @@ function Entity({ v, id, state }){
 				{ key: 'splash'
 				, onclick: () => {
 					if( isMobile ) {
-						document.body.requestFullscreen().finally(
+						document.body.requestFullscreen()
+						.then( () => {
+							try {
+								screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation
+								screen.lockOrientationUniversal('landscape')
+							} catch (e) {
+								console.error('could not lock orientation')
+							}
+						})
+						.finally(
 							() => route( route.Menu() )
 						)
 					} else {
