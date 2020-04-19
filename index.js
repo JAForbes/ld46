@@ -496,6 +496,7 @@ function Entity({ v, id, state }){
 
 	})
 }
+	setInterval( () => v.redraw(), 5000)
 
 	return () => console.log('render') || v('.app'
 		+ v.css`
@@ -512,6 +513,9 @@ function Entity({ v, id, state }){
 						route( route.Game() )
 					}
 				}, 'Play')
+				, v('p', 'width ', window.innerWidth)
+				, v('p', 'height ', window.innerHeight)
+				, v('p', 'orientation type ', window.screen.orientation.type )
 			)
 		, route.isClick( route() ) &&
 			v('.splash'
@@ -535,7 +539,7 @@ function Entity({ v, id, state }){
 				{ key: 'splash'
 				, onclick: () => {
 					if( isMobile ) {
-						document.body.requestFullscreen()
+						document.requestFullscreen()
 						.finally(
 							() => route( route.Menu() )
 						)
