@@ -99,6 +99,8 @@ function App({ v, route: parent, state, stream }){
 					position: absolute;
 					top: 0px;
 					left: 0px;
+					image-rendering: pixelated;
+					transform: translate(-50%, -50%) translate(var(--x, 0), var(--y, 0)) scale(var(--scale, 1)) rotate(var(--rotation, 0rad))
 				`
 				,
 				{ id: id()
@@ -196,9 +198,21 @@ function App({ v, route: parent, state, stream }){
 			)
 		, route.isGame( route() )
 			&& v('.game'
+				+ v.css`
+					position: absolute;
+					top: 0px;
+					left: 0px;
+					width: 100%;
+					height: 100%;
+				`
 				, { key: 'game' }
 				,v('.sprites'
-					,v('p', 'Game')
+					+ v.css`
+						position: absolute;
+						top: 0px;
+						left: 0px;
+						transform: translate(50vw, 50vh) scale(4);
+					`
 					,Object.keys(state().rendering).map(
 						id => v(Entity, { id, state, canvases })
 					)
