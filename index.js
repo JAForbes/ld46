@@ -374,6 +374,11 @@ function actionService({ canvases, playing: Playing, sounds, state, route, sheet
 			k => delete rendering[k]
 		)
 
+		// don't need to do every frame but whatever
+		Object.values(playing).forEach(
+			x => x.muted = state.muted()
+		)
+
 		Playing[id](playing)
 		state.rendering[id]( rendering )
 	}
@@ -419,6 +424,7 @@ function App({ v, route: parent, state, stream }){
 		// v.redraw()
 	})
 
+	state.muted(false)
 	state.rendering({})
 	playing[1]({})
 	state.dimensions({})
