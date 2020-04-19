@@ -29,7 +29,6 @@ const handleOrientation = () => {
 		}
 	} catch (e) {
 		err = e
-		v.redraw()
 	}
 }
 // handleOrientation()
@@ -525,6 +524,7 @@ function Entity({ v, id, state }){
 				, v('button', { onclick: () => handleOrientation() }, 'Handle Orientation')
 				, v('p', 'orientation type ', window.screen.orientation.type )
 				, v('p', 'body classlist', [...document.body.classList].join(' '))
+				, v('p', 'error', err && err.message )
 			)
 		, route.isClick( route() ) &&
 			v('.splash'
