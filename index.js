@@ -26,6 +26,7 @@ const handleOrientation = () => {
 	}
 }
 handleOrientation()
+window.onresize = handleOrientation
 window.addEventListener('orientationchange', handleOrientation)
 
 // todo-james generate this later
