@@ -19,7 +19,7 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 })
 
 const handleOrientation = () => {
-	if( window.screen.orientation.includes('portrait') ) {
+	if( window.screen.orientation.type.includes('portrait') ) {
 		document.body.classList.add('enable-rotate')
 	} else {
 		document.body.classList.remove('enable-rotate')
