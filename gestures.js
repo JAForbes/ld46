@@ -12,7 +12,7 @@ export default function gestures(container, visitor){
 
 	// faster than a tap
 	window.addEventListener('click', e => {
-		visitor({ type: 'click', center: { x: e.x, y: e.y } })
+		visitor({ type: 'click', center: { x: e.x, y: e.y }, ...e })
 	})
 	return mc
 }

@@ -3,6 +3,8 @@ import * as R from '../web_modules/ramda.js'
 
 export default function actions({ canvases, playing: Playing, sounds, state, route, sheet, raf }){
 
+	const prevClassNames = new WeakMap()
+
 	function renderCanvas(id){
 		/**
 		 * @type {CanvasRenderingContext2D}
@@ -20,6 +22,30 @@ export default function actions({ canvases, playing: Playing, sounds, state, rou
 			rules.filter(
 				rule => rule.actions.every( k => k in actions )
 			)
+
+		const applicableClassNames =
+			applicableRules
+				.flatMap( x => x.layers || [] )
+				.flatMap( x => x.css ? [x.css] : [] )
+				.map(
+					x => V.css(x).class
+				)
+
+		{
+
+			const prev = prevClassNames.get(context) || []
+			const removed =
+				R.difference(prev, applicableClassNames)
+
+			const added =
+				R.difference(applicableClassNames, prev)
+
+			context.canvas.classList.add(...added)
+			context.canvas.classList.remove(...removed)
+
+			prevClassNames.set(context, applicableClassNames )
+		}
+
 
 		const applicableRenderKeys =
 			applicableRules.flatMap(
@@ -77,10 +103,9 @@ export default function actions({ canvases, playing: Playing, sounds, state, rou
 				}
 			}
 		)
+
 		// 3. If we aren't, start playing the first sample
 		// 4. If we are, figure out if we should start playing the next sample, if so, do so, and store it in state.playing
-
-
 		const removed =
 			R.difference(Object.keys(rendering), applicableRenderKeys)
 

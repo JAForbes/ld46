@@ -62,6 +62,7 @@ function App({ v, route: parent, state, stream }){
 	})
 
 	gestures(document.body, x => {
+		// x.preventDefault()
 		lastGesture(x)
 	})
 
@@ -87,7 +88,9 @@ function App({ v, route: parent, state, stream }){
 		}
 	)
 	.map(
-		({ type, x, y, scale }) => ({ type, x, y, scale, theta: Math.atan2(y,x) + Math.PI / 2 })
+		({ type, x, y, scale }) => ({
+			type, x, y, scale, theta: Math.atan2(y,x) + Math.PI / 2
+		})
 	)
 	.map( relativeGesture )
 
@@ -144,21 +147,22 @@ function App({ v, route: parent, state, stream }){
 	state.gestureControlled({})
 
 
-	relativeGesture.map( ({ theta, x, y }) =>
-		Object.keys(state.gestureControlled()).filter( id => {
-			return canvases()[id]
-		})
-		.forEach( id => {
-			const context = canvases()[id]
-			const canvas = context.canvas
+	// relativeGesture.map( ({ theta, x, y }) =>
+	// 	Object.keys(state.gestureControlled()).filter( id => {
+	// 		return canvases()[id]
+	// 	})
+	// 	.forEach( id => {
+	// 		const context = canvases()[id]
+	// 		const canvas = context.canvas
 
-			canvas.style.setProperty('--rotation', theta+'rad')
-		})
-	)
+	// 		canvas.style.setProperty('--rotation', theta+'rad')
+	// 	})
+	// )
 
 	A.stream.dropRepeats(route.$stream.map( x => x.tag )).map(
 		() => {
 			if( route.isGame(route())) {
+				console.log('setup')
 				state.players[1](true)
 				state.rules[1]( shipData.rules )
 				state.gestureControlled[1](true)
@@ -167,9 +171,9 @@ function App({ v, route: parent, state, stream }){
 					// these actions current apply to entity 1
 					actions: {
 						// when that actions was added
-						n: Date.now(),
-						firing: Date.now(),
-						moving: Date.now()
+						sw: Date.now(),
+						// firing: Date.now(),
+						// moving: Date.now()
 					}
 				})
 			}
@@ -297,13 +301,17 @@ function App({ v, route: parent, state, stream }){
 					height: var(--viewport-height);
 					transform-style: preserve-3d;
 					perspective: 1000px;
+					overflow: hidden;
 				`
 				, { key: 'game' }
 				, v('.camera'
 					+ v.css`
-						width: var(--viewport-width);
-						height: var(--viewport-height);
-						transform: scale(-1,-1) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) scale(-1,-1) scale(var(--scale, 1));
+						position: absolute;
+						top: 0px;
+						left: 0px;
+						width: 0px;
+						height: 0px;
+						transform: translate(calc( var(--viewport-width) * 0.5), calc( var(--viewport-height) * 0.5 )) scale(-1,-1) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) scale(-1,-1) scale(var(--scale, 1));
     					transition: 1s;
 					`
 					,
@@ -313,7 +321,6 @@ function App({ v, route: parent, state, stream }){
 							position: absolute;
 							top: 0px;
 							left: 0px;
-							transform: translate( calc( 0.5 * var(--viewport-width, 100vw) ), calc(0.5 * var(--viewport-height, 100vh)) );
 						`
 						,Object.keys(state().rendering).map(
 							id => v(Entity, { id, state, canvases })
@@ -321,6 +328,11 @@ function App({ v, route: parent, state, stream }){
 					)
 				)
 				,v('.hud'
+					+ css`
+						position: absolute;
+						top: 0px;
+						left: 0px;
+					`
 					, v('button', {
 						onclick(){
 							sounds().test.snd.play()

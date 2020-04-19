@@ -140,3 +140,15 @@ I've got the sound systems, a camera system, the basic coordinates.  A lot of st
 I can track the touch input and map it to a css var which rotates either a canvas, or a camera.  But I'm not sure how decoupled it should be.
 
 I'm thinking abstracting this too much is a mistake.  So maybe a stream that map gestures directly into the player coords/velocity.  I want to start building some gameplay soon.  But I'm also tempted to just keep checking off the hard parts.  I've made games before, so I'm more interested in this peripheral stuff I don't usually get time to play with e.g. menus.  I'm more excited in having a menu with a mute button than a game itself.
+
+#### 2020-04-19    02:11 AM
+
+So I'm pretty confident this won't end with much to show, but that's ok.  Current thing I'm looking at is applying styles based on rules.  Mainly to do inversions of sprites, but could also apply things like animations, css filters etc. 
+
+So the current system grabs the applicable rules, then throws it away once it has some matching data.  Problem is I on't know what rules were applied then.  And then there's the issue of overlapping styles for multiple rules.
+
+That's not the main issue either.  I need to be able to remove styles that are no longer applied.  But I'm not sure how I can know what the old styles were without inspecting the class list, but if I inspect the class list, existing classnames unrelated to that service could be clobbered.
+
+I guess that leaves me with some kind of prefix...  okay solved that... except - I was thinking of using bss to generate the class names for the styles, so I can't prefix them.
+
+But that's ok, I can just store all the class names bss created on my behalf.
