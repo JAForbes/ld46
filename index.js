@@ -121,8 +121,8 @@ function App({ v, route: parent, state, stream }){
 			height: 100%;
 			position: absolute;
 			top: 0px;
-			width: 100%;
-			height: 100%;
+			width: var(--viewport-width);
+    		height: var(--viewport-height);
 		`
 		,
 		[ route.isMenu( route() )
@@ -139,8 +139,8 @@ function App({ v, route: parent, state, stream }){
 		, route.isClick( route() ) &&
 			v('.splash'
 				+ v.css`
-					width: 100%;
-					height: 100%;
+					width: var(--viewport-width);
+					height: var(--viewport-height);
 					background:  url('/assets/splash3.jpg');
 					background-size: cover;
 					opacity: 0;
@@ -202,8 +202,8 @@ function App({ v, route: parent, state, stream }){
 					position: absolute;
 					top: 0px;
 					left: 0px;
-					width: 100%;
-					height: 100%;
+					width: var(--viewport-width);
+    				height: var(--viewport-height);
 				`
 				, { key: 'game' }
 				,v('.sprites'
@@ -211,7 +211,7 @@ function App({ v, route: parent, state, stream }){
 						position: absolute;
 						top: 0px;
 						left: 0px;
-						transform: translate( calc( 0.5 * var(--viewport-width, 100vw) ), 0.5 * var(--viewport-height, 100vh) ) scale(4);
+						transform: translate( calc( 0.5 * var(--viewport-width, 100vw) ), calc(0.5 * var(--viewport-height, 100vh)) ) scale(4);
 					`
 					,Object.keys(state().rendering).map(
 						id => v(Entity, { id, state, canvases })
