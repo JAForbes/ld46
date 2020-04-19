@@ -276,7 +276,9 @@ function App({ v, route: parent, stream }){
 					width: var(--viewport-width);
 					height: var(--viewport-height);
 					background:  url('/assets/splash3.jpg');
-					background-size: cover;
+					background-size: contain;
+					background-position: center;
+					background-repeat: no-repeat;
 					opacity: 0;
 					position: absolute;
 					top: 0px;

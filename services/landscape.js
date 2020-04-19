@@ -12,6 +12,9 @@ export default function({ v, stream }){
         orientation: 'landscape'
     })
 
+    const isMobile =
+        window.matchMedia('(max-width: 600px)').matches
+
     v.css.css('body.enable-rotate', `
         transform: rotate(-90deg);
         transform-origin: left top;
@@ -32,33 +35,35 @@ export default function({ v, stream }){
 
     const handleOrientation = () => {
 
-        actual({ width: window.innerWidth, height: window.innerHeight })
+        // actual({ width: window.innerWidth, height: window.innerHeight })
 
-        try {
-            if( window.innerWidth < window.innerHeight ) {
-                document.body.classList.add('enable-rotate')
+        // try {
+        //     if( window.innerWidth < window.innerHeight ) {
+        //         document.body.classList.add('enable-rotate')
 
-                viewport({
-                    width: window.innerHeight,
-                    height: window.innerWidth,
-                    orientation: 'portrait'
-                })
-                v.redraw()
-            } else {
-                document.body.classList.remove('enable-rotate')
-                viewport({
-                    width: window.innerWidth,
-                    height: window.innerHeight,
-                    orientation: 'landscape'
-                })
-                v.redraw()
-            }
-        } catch (e) {}
+        //         viewport({
+        //             width: window.innerHeight,
+        //             height: window.innerWidth,
+        //             orientation: 'portrait'
+        //         })
+        //         v.redraw()
+        //     } else {
+        //         document.body.classList.remove('enable-rotate')
+        //         viewport({
+        //             width: window.innerWidth,
+        //             height: window.innerHeight,
+        //             orientation: 'landscape'
+        //         })
+        //         v.redraw()
+        //     }
+        // } catch (e) {}
     }
 
-    window.onresize = handleOrientation
-    // window.addEventListener('orientationchange', handleOrientation)
-    handleOrientation()
+    if(isMobile){
+        window.onresize = handleOrientation
+        handleOrientation()
+    }
+    // isMobile && window.addEventListener('orientationchange', handleOrientation)
 
     return { actual, viewport }
 }
