@@ -211,7 +211,7 @@ function App({ v, route: parent, state, stream }){
 						position: absolute;
 						top: 0px;
 						left: 0px;
-						transform: translate(50vw, 50vh) scale(4);
+						transform: translate( calc( 0.5 * var(--viewport-width, 100vw) ), 0.5 * var(--viewport-height, 100vh) ) scale(4);
 					`
 					,Object.keys(state().rendering).map(
 						id => v(Entity, { id, state, canvases })

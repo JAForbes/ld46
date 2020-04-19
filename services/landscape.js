@@ -9,6 +9,13 @@ export default function({ v }){
         position: absolute;
         top: 100%;
         left: 0;
+        --viewport-width: 100vh;
+        --viewport-height: 100vw;
+    `)
+
+    v.css.css('body', `
+        --viewport-width: 100vw;
+        --viewport-height: 100vh;
     `)
 
     const handleOrientation = () => {
