@@ -18,16 +18,16 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.classList.add( css.$animate(time, styles) )
 })
 
-// const handleOrientation = () => {
-// 	if( window.innerWidth < window.innerHeight ) {
-// 		document.body.classList.add('enable-rotate')
-// 	} else {
-// 		document.body.classList.remove('enable-rotate')
-// 	}
-// }
+const handleOrientation = () => {
+	if( window.innerWidth < window.innerHeight ) {
+		document.body.classList.add('enable-rotate')
+	} else {
+		document.body.classList.remove('enable-rotate')
+	}
+}
 // handleOrientation()
-// window.onresize = handleOrientation
-// window.addEventListener('orientationchange', handleOrientation)
+window.onresize = handleOrientation
+window.addEventListener('orientationchange', handleOrientation)
 
 // todo-james generate this later
 const shipRules = [
@@ -515,6 +515,7 @@ function Entity({ v, id, state }){
 				}, 'Play')
 				, v('p', 'width ', window.innerWidth)
 				, v('p', 'height ', window.innerHeight)
+				, v('button', { onclick: () => handleOrientation() }, 'Handle Orientation')
 				, v('p', 'orientation type ', window.screen.orientation.type )
 			)
 		, route.isClick( route() ) &&
