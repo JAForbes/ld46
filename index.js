@@ -18,6 +18,14 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 	dom.classList.add( css.$animate(time, styles) )
 })
 
+window.addEventListener('orientationchange', () => {
+	if( window.screen.orientation.includes('portrait') ) {
+		document.body.classList.add('enable-rotate')
+	} else {
+		document.body.classList.remove('enable-rotate')
+	}
+})
+
 // todo-james generate this later
 const shipRules = [
 	{
