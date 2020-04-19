@@ -352,6 +352,10 @@ function App({ v, route: parent, stream }){
 					transform-style: preserve-3d;
 					perspective: 1000px;
 					overflow: hidden;
+
+					// temporary
+					background: url(https://2.bp.blogspot.com/-F8vJLHc7beI/Wtnn9ztqETI/AAAAAAAACQU/rb9PQCSOEuEdsKIrejFGYWjWkSnj1cL7wCLcBGAs/s1600/startile.png);
+					background-position-x: 0px;
 				`
 				, { key: 'game' }
 				, v('.camera'
