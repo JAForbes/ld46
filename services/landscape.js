@@ -3,13 +3,15 @@ export default function({ v, stream }){
     const viewport = stream({
         width: window.innerWidth,
         height: window.innerHeight,
-        orientation: 'landscape'
+        orientation: 'landscape',
+        rotation: 0
     })
 
     const actual = stream({
         width: window.innerWidth,
         height: window.innerHeight,
-        orientation: 'landscape'
+        orientation: 'landscape',
+        rotation: 0
     })
 
     const isMobile =
@@ -44,7 +46,8 @@ export default function({ v, stream }){
                 viewport({
                     width: window.innerHeight,
                     height: window.innerWidth,
-                    orientation: 'portrait'
+                    orientation: 'portrait',
+                    rotation: window.screen.orientation.angle * Math.PI / 180
                 })
                 v.redraw()
             } else {
@@ -52,7 +55,8 @@ export default function({ v, stream }){
                 viewport({
                     width: window.innerWidth,
                     height: window.innerHeight,
-                    orientation: 'landscape'
+                    orientation: 'landscape',
+                    rotation: window.screen.orientation.angle * Math.PI / 180
                 })
                 v.redraw()
             }

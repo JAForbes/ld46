@@ -91,7 +91,8 @@ function App({ v, route: parent, stream }){
 	)
 	.map(
 		({ type, x, y, scale }) => ({
-			type, x, y, scale, theta: Math.atan2(y,x) + Math.PI / 2
+			type, x, y, scale, theta:
+				(Math.atan2(y,x) + Math.PI / 2) - screenDimensions.actual().rotation
 		})
 	)
 	.map( relativeGesture )
