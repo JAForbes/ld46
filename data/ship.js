@@ -96,9 +96,9 @@ export const rules = [
 	{
 		actions: ['nw', 'firing'],
 		layers: [{
-			name: 'Base',
+			name: 'Firing',
 			title: 'character',
-			tag: 'Firing',
+			tag: 'NorthEast',
 			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
 		}]
@@ -176,9 +176,9 @@ export const rules = [
 	{
 		actions: ['nw', 'moving'],
 		layers: [{
-			name: 'Base',
+			name: 'Engines',
 			title: 'character',
-			tag: 'Engines',
+			tag: 'NorthEast',
 			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
 		}]
