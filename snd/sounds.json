@@ -3,6 +3,58 @@
         {
             "name": "test",
             "src": "/snd/test.wav"
+        },
+        {
+            "src": "/snd/chopper.wav",
+            "name": "chopper"
+        },
+        {
+            "src": "/snd/engine.wav",
+            "name": "engine"
+        },
+        {
+            "src": "/snd/engine2.wav",
+            "name": "engine2"
+        },
+        {
+            "src": "/snd/engine3.wav",
+            "name": "engine3"
+        },
+        {
+            "src": "/snd/hyperspace.wav",
+            "name": "hyperspace"
+        },
+        {
+            "src": "/snd/impact-small.wav",
+            "name": "impact-small"
+        },
+        {
+            "src": "/snd/seeker.wav",
+            "name": "seeker"
+        },
+        {
+            "src": "/snd/slither.wav",
+            "name": "slither"
+        },
+        {
+            "src": "/snd/test.wav",
+            "name": "test"
+        },
+        {
+            "src": "/snd/toggle.wav",
+            "name": "toggle"
+        },
+        {
+            "src": "/snd/wave-light.wav",
+            "name": "wave-light"
+        },
+        {
+            "src": "/snd/wave-mid.wav",
+            "name": "wave-mid"
+        },
+        {
+            "src": "/snd/shot.wav",
+            "name": "shot"
         }
     ]
 }

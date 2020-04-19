@@ -11,7 +11,6 @@ export default function soundsClickService({
 	.then(onAllowed)
 
 	function wait(){
-		console.log('wait')
 		return new Promise( Y => {
 			const ours = state.lastGesture.$stream.map( x => x)
 			A.run(

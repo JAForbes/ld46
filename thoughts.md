@@ -126,3 +126,7 @@ I also think I understand sfxr/bfxr/jfxr a bit better, I was actually tuning the
 I might have a 2-3 hour sleep.  Wake up at 2-3 am and just do some art.  We'll see.  My brain might be ready to code the sound system.  I'd really like the system to change volume based on distance for some effects.  I've done that before and it added a lot of immersion.  I think it would be especially important for this kind of game.
 
 Also was thinking of names.  The best I came up with so far was convoyage.  As in "bon voyage" as "convoy" as a kind of tongue in cheek name implying the convoy's your protecting aren't likely to survive.
+
+##### 2020-04-29    02:11 AM
+
+Couldn't sleep.  But had an idea for the story.  I feel a lot more motivated now.  To get the story done, I need to make 3 levels/scenarios, some kind of dialog system, some avatars for different roles/characters in the game, some end state splash screens and then yeah the menu.  Maybe doable, maybe not.  If I don't finish before the deadline I'll probably finish it some other time.  Gonna try and get some sleep again.

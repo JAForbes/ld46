@@ -9,6 +9,6 @@ You'll need a `./tools` directory with aseprite located at `./tools/aseprite/ase
 
 All source code and art by James Forbes.
 
-- Sounds generated via https://jfxr.frozenfractal.com/
+- Sounds generated via https://jfxr.frozenfractal.com/ and http://sfbgames.com/chiptone
 - Sprites authored with https://www.aseprite.org/
-- Web framework https://attain.harth.io
+- Web framework (very much alpha) https://attain.harth.io

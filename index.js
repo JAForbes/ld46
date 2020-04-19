@@ -9,26 +9,36 @@ import soundsClickService from './services/sound.js'
 const A = V.A
 const css = V.css
 
-const actions = [
-	// directions
-	'n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw',
-	// other
-	'firing',
-	'accelerating'
-]
-
 // todo-james generate this later
 const shipRules = [
+	{
+		actions: ['firing'],
+		sounds: {
+			// play again when sound is 50% complete
+			// do not cut out existing sound?
+			repeat: true,
+			repeatRate: 0.2,
+			sample: ['shot']
+		}
+	},
+	{
+		actions: ['moving'],
+		sounds: {
+			repeat: true,
+			repeatRate: 0.8,
+			sample: ['engine3'],
+			volume: 0.2
+		}
+	},
 	{
 		actions: ['n', 'firing'],
 		layers: [{
 			name: 'Firing',
 			title: 'character',
 			tag: 'North',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['ne', 'firing'],
@@ -36,10 +46,9 @@ const shipRules = [
 			name: 'Firing',
 			title: 'character',
 			tag: 'NorthEast',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['e', 'firing'],
@@ -47,10 +56,9 @@ const shipRules = [
 			name: 'Firing',
 			title: 'character',
 			tag: 'East',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['se', 'firing'],
@@ -58,10 +66,9 @@ const shipRules = [
 			name: 'Firing',
 			title: 'character',
 			tag: 'SouthEast',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['s', 'firing'],
@@ -69,10 +76,9 @@ const shipRules = [
 			name: 'Firing',
 			title: 'character',
 			tag: 'South',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['sw', 'firing'],
@@ -80,10 +86,9 @@ const shipRules = [
 			name: 'Firing',
 			title: 'character',
 			tag: 'SouthEast',
-			css: css.transform(`scaleX(-1)`)+'',
+			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['w', 'firing'],
@@ -91,10 +96,9 @@ const shipRules = [
 			name: 'Firing',
 			title: 'character',
 			tag: 'East',
-			css: css.transform(`scaleX(-1)`)+'',
+			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['nw', 'firing'],
@@ -102,10 +106,9 @@ const shipRules = [
 			name: 'Base',
 			title: 'character',
 			tag: 'Firing',
-			css: css.transform(`scaleX(-1)`)+'',
+			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['n', 'moving'],
@@ -113,10 +116,9 @@ const shipRules = [
 			name: 'Engines',
 			title: 'character',
 			tag: 'North',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['ne', 'moving'],
@@ -124,10 +126,9 @@ const shipRules = [
 			name: 'Engines',
 			title: 'character',
 			tag: 'NorthEast',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['e', 'moving'],
@@ -135,10 +136,9 @@ const shipRules = [
 			name: 'Engines',
 			title: 'character',
 			tag: 'East',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['se', 'moving'],
@@ -146,10 +146,9 @@ const shipRules = [
 			name: 'Engines',
 			title: 'character',
 			tag: 'SouthEast',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['s', 'moving'],
@@ -157,10 +156,9 @@ const shipRules = [
 			name: 'Engines',
 			title: 'character',
 			tag: 'South',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['sw', 'moving'],
@@ -168,10 +166,9 @@ const shipRules = [
 			name: 'Engines',
 			title: 'character',
 			tag: 'SouthEast',
-			css: css.transform(`scaleX(-1)`),
+			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['w', 'moving'],
@@ -179,10 +176,9 @@ const shipRules = [
 			name: 'Engines',
 			title: 'character',
 			tag: 'East',
-			css: css.transform(`scaleX(-1)`),
+			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['nw', 'moving'],
@@ -190,10 +186,9 @@ const shipRules = [
 			name: 'Base',
 			title: 'character',
 			tag: 'Engines',
-			css: css.transform(`scaleX(-1)`),
+			css: css.transform(`scaleX(-1)`).style,
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['n'],
@@ -201,10 +196,9 @@ const shipRules = [
 			name: 'Base',
 			title: 'character',
 			tag: 'North',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['ne'],
@@ -212,10 +206,9 @@ const shipRules = [
 			name: 'Base',
 			title: 'character',
 			tag: 'NorthEast',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['e'],
@@ -223,10 +216,9 @@ const shipRules = [
 			name: 'Base',
 			title: 'character',
 			tag: 'East',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['se'],
@@ -234,10 +226,9 @@ const shipRules = [
 			name: 'Base',
 			title: 'character',
 			tag: 'SouthEast',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['s'],
@@ -245,10 +236,9 @@ const shipRules = [
 			name: 'Base',
 			title: 'character',
 			tag: 'South',
-			css: '',
+			css: {},
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['sw'],
@@ -258,8 +248,7 @@ const shipRules = [
 			tag: 'SouthEast',
 			css: css.transform(`scaleX(-1)`),
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['w'],
@@ -269,8 +258,7 @@ const shipRules = [
 			tag: 'East',
 			css: css.transform(`scaleX(-1)`),
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 	{
 		actions: ['nw'],
@@ -280,12 +268,11 @@ const shipRules = [
 			tag: 'NorthEast',
 			css: css.transform(`scaleX(-1)`),
 			repeat: true
-		}],
-		sounds: []
+		}]
 	},
 ]
 
-function renderCanvasService({ canvases, state, route, sheet }){
+function actionService({ canvases, playing: Playing, sounds, state, route, sheet }){
 
 	function renderCanvas(id){
 		/**
@@ -295,24 +282,80 @@ function renderCanvasService({ canvases, state, route, sheet }){
 		const actor = state.actors()[id]
 		const actions = actor ? actor.actions : {}
 		const rendering = { ...state.rendering()[id] }
+		const playing = { ...Playing()[id] }
 		const indexedFrames = state.framesIndexed()
+		const rules = state.rules[id]() || []
 
 		context.canvas.width = context.canvas.width
 		const applicableRules =
-			shipRules.filter(
+			rules.filter(
 				rule => rule.actions.every( k => k in actions )
 			)
 
-		const applicableKeys =
+		const applicableRenderKeys =
 			applicableRules.flatMap(
-				rule => rule.layers.map(
-					x => `${x.title}${x.tag}${x.name}`
-				)
+				rule =>
+					rule.layers
+					? rule.layers.map(
+						x => `${x.title}${x.tag}${x.name}`
+					)
+					: []
 			)
 
-		const removed = R.difference(Object.keys(rendering), applicableKeys)
+		// 1. get the sound objects that are applicable to the current actions
+		const applicableSounds =
+			applicableRules
+				.flatMap( x => x.sounds ? [x.sounds] : [] )
+				// guarantee non empty sample list
+				.flatMap( x => x.sample.length ? [x] : [])
 
-		R.uniqBy( x => x, applicableKeys)
+		// 2. for each applicable sound, find if we are playing any of those sounds already for this entity
+		applicableSounds.forEach(
+			({ sample=['test'], repeatRate=1, repeat=false, volume=1 }) => {
+
+				const existingI = sample.findIndex( k => k in playing )
+				const existing = existingI > -1 && sample[existingI]
+
+				if( existing ) {
+					const sound = playing[existing]
+					const duration = sound.duration
+					const elapsed = sound.currentTime
+
+					// cleanup expired sounds
+					if( elapsed >= duration ){
+						sound.pause()
+						delete playing[existing]
+					}
+					if( repeat ) {
+						const rate = elapsed / duration
+
+						if ( rate >= repeatRate ) {
+							const next = sample[(existingI+1) % sample.length]
+							const snd = new Audio()
+							snd.src = sounds()[next].snd.src
+							playing[next] = snd
+							snd.volume = volume
+							snd.play()
+						}
+					}
+				} else if (!existing) {
+					const key = sample[0]
+					const snd = new Audio()
+					snd.src = sounds()[key].snd.src
+					snd.volume = volume
+					playing[key] = snd
+					snd.play()
+				}
+			}
+		)
+		// 3. If we aren't, start playing the first sample
+		// 4. If we are, figure out if we should start playing the next sample, if so, do so, and store it in state.playing
+
+
+		const removed =
+			R.difference(Object.keys(rendering), applicableRenderKeys)
+
+		R.uniqBy( x => x, applicableRenderKeys)
 		.forEach( key => {
 			const time = rendering[key] || Date.now()
 
@@ -331,6 +374,7 @@ function renderCanvasService({ canvases, state, route, sheet }){
 			k => delete rendering[k]
 		)
 
+		Playing[id](playing)
 		state.rendering[id]( rendering )
 	}
 
@@ -348,6 +392,7 @@ function App({ v, route: parent, state, stream }){
 	const sheet = stream()
 	const sounds = stream()
 	const canvases = stream({})
+	const playing = A.Z({ stream: stream() })
 
 	if( window.location.pathname != "/" ) {
 		window.location.pathname = "/"
@@ -366,7 +411,7 @@ function App({ v, route: parent, state, stream }){
 
 	soundsClickService({ v, route, state, sounds })
 	metadataService({ v, route, sheet, state })
-	renderCanvasService({ canvases, state, route, sheet })
+	actionService({ canvases, sounds, playing, state, route, sheet })
 
 	gestures(document.body, x => {
 		state.lastGesture(x)
@@ -375,35 +420,25 @@ function App({ v, route: parent, state, stream }){
 	})
 
 	state.rendering({})
+	playing[1]({})
 	state.dimensions({})
 	state.actors({})
 
 	A.stream.dropRepeats(route.$stream.map( x => x.tag )).map(
 		() => {
 			if( route.isGame(route())) {
-				state.players(
-					x => ({ ...x, 1: true })
-				)
-				state.rendering(
-					x => ({
-						...x,
-						1: {}
-					})
-				)
-				state.actors(
-					x => ({
-						...x,
-						1: {
-							// these actions current apply to entity 1
-							actions: {
-								// when that actions was added
-								n: Date.now(),
-								firing: Date.now(),
-								moving: Date.now()
-							}
-						}
-					})
-				)
+				state.players[1](true)
+				state.rules[1]( shipRules )
+				state.rendering[1]({})
+				state.actors[1]({
+					// these actions current apply to entity 1
+					actions: {
+						// when that actions was added
+						n: Date.now(),
+						firing: Date.now(),
+						moving: Date.now()
+					}
+				})
 			}
 		}
 	)
