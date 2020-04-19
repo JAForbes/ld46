@@ -15,7 +15,7 @@ export default function({ v, stream }){
     })
 
     const isMobile =
-        window.matchMedia('(max-width: 600px)').matches
+        Math.min( window.innerHeight, window.innerWidth ) < 600
 
     v.css.css('body.enable-rotate', `
         transform: rotate(-90deg);

@@ -13,7 +13,7 @@ const A = V.A
 const css = V.css
 
 const isMobile =
-	window.matchMedia('(max-width: 600px)').matches
+	Math.min( window.innerHeight, window.innerWidth ) < 600
 
 
 css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
