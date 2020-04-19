@@ -529,10 +529,10 @@ function Entity({ v, id, state }){
 					if( isMobile ) {
 						document.documentElement.requestFullscreen()
 						.finally(
-							() => route( route.Menu() )
+							() => route( route.Game() )
 						)
 					} else {
-						route(route.Menu())
+						route(route.Game())
 					}
 				}
 				, hook: v.css.$animate.out('0.5s', {
