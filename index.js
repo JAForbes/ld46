@@ -23,8 +23,11 @@ css.$animate.out = (time, styles) => ({ dom }) => () => new Promise(res => {
 
 window.oncontextmenu = e => e.preventDefault()
 
-function App({ v, route: parent, state, stream }){
+function App({ v, route: parent, stream }){
 
+	const state = {}
+
+	console.log('mouting app')
 	const sheet = stream()
 	const sounds = stream()
 	const canvases = stream({})
@@ -53,7 +56,7 @@ function App({ v, route: parent, state, stream }){
 			() => route( route.Click() )
 		)
 
-	const dimensions = landscapeService({ v, stream })
+	const screenDimensions = landscapeService({ v, stream })
 
 	const raf = A.stream.raf()
 
@@ -62,17 +65,16 @@ function App({ v, route: parent, state, stream }){
 	})
 
 	gestures(document.body, x => {
-		// x.preventDefault()
 		lastGesture(x)
 	})
 
 	const relativeGesture = stream()
-	const halfDimensions = dimensions.actual.map(
+	const halfDimensions = screenDimensions.actual.map(
 		({ width, height }) => ({ width: width / 2, height: height / 2 })
 	)
 
 	lastGesture.map( x =>
-		(dimensions.actual().orientation == 'landscape' || true)
+		(screenDimensions.actual().orientation == 'landscape' || true)
 		? {
 			type: x.type
 			, x: x.center.x - halfDimensions().width
@@ -136,28 +138,59 @@ function App({ v, route: parent, state, stream }){
 
 	Object.assign(window, {
 		state, sheet, sounds, route, canvases, v, lastGesture,
-		dimensions, relativeGesture
+		screenDimensions, relativeGesture
 	})
 
-	state.muted(true)
-	state.rendering({})
+	state.muted = stream.of()
+	state.rendering = A.Z({ stream: stream.of({}) })
 	playing[1]({})
-	state.dimensions({})
-	state.actors({})
-	state.gestureControlled({})
+	state.frames = A.Z({ stream: stream.of({} )})
+	state.framesIndexed = A.Z({ stream: stream.of({} )})
+	state.dimensions = A.Z({ stream: stream.of({}) })
+	state.actors = A.Z({ stream: stream.of({} )})
+	state.gestureControlled = A.Z({ stream: stream.of({}) })
+	state.particles = A.Z({ stream: stream.of({}) })
+	state.soundJSON = A.Z({ stream: stream.of({} )})
+	state.players = A.Z({ stream: stream.of({} )})
+	state.rules = A.Z({ stream: stream.of({} )})
 
+	relativeGesture.map( ({ theta }) =>
+		Object.keys(state.gestureControlled()).forEach( id => {
+			if (id in state.particles()) {
 
-	// relativeGesture.map( ({ theta, x, y }) =>
-	// 	Object.keys(state.gestureControlled()).filter( id => {
-	// 		return canvases()[id]
-	// 	})
-	// 	.forEach( id => {
-	// 		const context = canvases()[id]
-	// 		const canvas = context.canvas
+				const deg =
+					((theta * 180 / Math.PI) + 720) % 360
 
-	// 		canvas.style.setProperty('--rotation', theta+'rad')
-	// 	})
-	// )
+				var ordinal =
+					['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'].map( x => x.toLowerCase() )
+
+				var ranges =
+					ordinal.map(
+						(x, i) => ({ x, deg: -22.5 + (i * 45) })
+					)
+					.map(
+						({ x, deg }) => ({ x, start: deg, end: deg + 45 })
+					)
+
+				ranges.push({ x: "n", start: 337.5, end: 360 })
+
+				const action =
+					ranges.find(
+						({ start, end }) => deg > start && deg <= end
+					)
+					.x
+
+				const actions = state.actors[id].actions() || {}
+
+				const oldTime = actions[action] || Date.now()
+				ordinal.forEach( k => delete actions[k] )
+				actions[action] = oldTime
+
+				state.particles[id].theta(theta)
+				state.actors[id].actions(actions)
+			}
+		})
+	)
 
 	A.stream.dropRepeats(route.$stream.map( x => x.tag )).map(
 		() => {
@@ -167,6 +200,9 @@ function App({ v, route: parent, state, stream }){
 				state.rules[1]( shipData.rules )
 				state.gestureControlled[1](true)
 				state.rendering[1]({})
+				state.particles[1]({
+					x: 0, y: 0, vx: 0, vy: 0, ax: 0, ay: 0, theta: 0
+				})
 				state.actors[1]({
 					// these actions current apply to entity 1
 					actions: {
@@ -180,7 +216,6 @@ function App({ v, route: parent, state, stream }){
 		}
 	)
 
-
 	A.stream.dropRepeats(route.tag.$stream)
 		.map( () => v.redraw() )
 
@@ -189,7 +224,7 @@ function App({ v, route: parent, state, stream }){
 			state.dimensions()[id] || { x: 32, y: 32 }
 
 		return () =>
-			v('canvas.entity'
+			v('entity'
 				+ v.css`
 					position: absolute;
 					top: 0px;
@@ -200,15 +235,19 @@ function App({ v, route: parent, state, stream }){
 				,
 				{ id: id()
 				, key: id()
-				, width: dimensions.x
+				}
+			, v('canvas'
+				,
+				{ width: dimensions.x
 				, height: dimensions.y
 				, hook: ({ dom }) => {
 					canvases(
 						({ [id()]: dom.getContext('2d') })
 					)
 				}
-
-		})
+				}
+			)
+		)
 	}
 
 	return () => console.log('render') || v('.app'
@@ -322,7 +361,7 @@ function App({ v, route: parent, state, stream }){
 							top: 0px;
 							left: 0px;
 						`
-						,Object.keys(state().rendering).map(
+						,Object.keys(state.rendering()).map(
 							id => v(Entity, { id, state, canvases })
 						)
 					)

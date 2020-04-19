@@ -1,7 +1,7 @@
 import Loader from '../loader.js'
 import * as R from '../web_modules/ramda.js'
 
-export default function metadataService({ v, sheet, state, route }){
+export default function metadataService({ v, sheet, state }){
 	return Loader({
 		xs: [
 			'/assets/frames.json',

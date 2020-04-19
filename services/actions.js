@@ -4,6 +4,7 @@ import * as R from '../web_modules/ramda.js'
 export default function actions({ canvases, playing: Playing, sounds, state, route, sheet, raf }){
 
 	const prevClassNames = new WeakMap()
+	const now = Date.now()
 
 	function renderCanvas(id){
 		/**
@@ -111,9 +112,9 @@ export default function actions({ canvases, playing: Playing, sounds, state, rou
 
 		R.uniqBy( x => x, applicableRenderKeys)
 		.forEach( key => {
-			const time = rendering[key] || Date.now()
+			const time = rendering[key] || now
 
-			const dt = Date.now() - time
+			const dt = now - time
 			const rate = 100 // 100ms per frame (for now)
 			const frames = indexedFrames[key]
 			const i = Math.ceil((dt / rate)) % frames.length
