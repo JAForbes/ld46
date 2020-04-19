@@ -35,28 +35,28 @@ export default function({ v, stream }){
 
     const handleOrientation = () => {
 
-        // actual({ width: window.innerWidth, height: window.innerHeight })
+        actual({ width: window.innerWidth, height: window.innerHeight })
 
-        // try {
-        //     if( window.innerWidth < window.innerHeight ) {
-        //         document.body.classList.add('enable-rotate')
+        try {
+            if( window.innerWidth < window.innerHeight ) {
+                document.body.classList.add('enable-rotate')
 
-        //         viewport({
-        //             width: window.innerHeight,
-        //             height: window.innerWidth,
-        //             orientation: 'portrait'
-        //         })
-        //         v.redraw()
-        //     } else {
-        //         document.body.classList.remove('enable-rotate')
-        //         viewport({
-        //             width: window.innerWidth,
-        //             height: window.innerHeight,
-        //             orientation: 'landscape'
-        //         })
-        //         v.redraw()
-        //     }
-        // } catch (e) {}
+                viewport({
+                    width: window.innerHeight,
+                    height: window.innerWidth,
+                    orientation: 'portrait'
+                })
+                v.redraw()
+            } else {
+                document.body.classList.remove('enable-rotate')
+                viewport({
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    orientation: 'landscape'
+                })
+                v.redraw()
+            }
+        } catch (e) {}
     }
 
     if(isMobile){

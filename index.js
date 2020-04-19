@@ -179,7 +179,7 @@ function App({ v, route: parent, stream }){
 						({ start, end }) => deg > start && deg <= end
 					)
 					.x
-P
+
 				const actions = state.actors[id].actions() || {}
 
 				const oldTime = actions[action] || Date.now()
