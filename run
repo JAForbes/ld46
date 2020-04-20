@@ -12,7 +12,7 @@ function deploy(){
 
     mkdir -p dist
     rm -fr ./dist/*
-    cat index.html | sed "s,?version,?version=$now," > ./dist.index.html
+    cat index.html | sed "s,?version,?version=$now," > ./dist/index.html
     cp manifest.json ./dist/manifest.json
     cp -r web_modules ./dist/
     cp *.js ./dist/
