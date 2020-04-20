@@ -168,3 +168,7 @@ Problem is there's only 3 or 4 hours left of the jam.  But wow did I learn a lot
 #### 2020-04-20    07:56 AM
 
 Spent some time getting the splash screen to only rotate on mobile, and making the start button always appear in view even if the mobile nav is taking up a lot of headroom when in landscape.
+
+#### 2020-04-20    09:53 AM
+
+Working on an infinite background component now.  I'm thinking I can use `translate` to move it efficiently, but set the position based on a math modulus of the dimensions.

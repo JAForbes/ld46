@@ -117,6 +117,7 @@ function App({ v, route: parent, stream }){
 	state.muted = stream.of(false)
 	state.rendering = A.Z({ stream: stream.of({}) })
 	playing[1]({})
+	state.backgroundParticleSync = A.Z({ stream: stream.of({} )})
 	state.frames = A.Z({ stream: stream.of({} )})
 	state.framesIndexed = A.Z({ stream: stream.of({} )})
 	state.dimensions = A.Z({ stream: stream.of({}) })
@@ -160,6 +161,32 @@ function App({ v, route: parent, stream }){
 			})
 		)
 
+	relativePan.map( ({ x, y }) => {
+		const polarity = { x: x > 0 ? 1 : -1, y: y > 1 ? 1 : -1 }
+
+		Object.keys(state.gestureControlled()).map( id => {
+			const particle = state.particles[id]
+
+			particle.$mutateSilent( o => {
+				o.vx += 0.5 * polarity.x
+				o.vy += 0.5 * polarity.y
+			})
+
+		})
+	})
+
+	raf.map( () => {
+		Object.keys( state.particles() ).map( id => {
+			state.particles[id].$mutateSilent( o => {
+				o.x += o.vx
+				o.y += o.vy
+
+				o.vy *= 0.99
+				o.vx *= 0.99
+			})
+		})
+	})
+
 	relativePan.map( ({ theta, type }) =>
 		Object.keys(state.gestureControlled()).filter( () => type == 'pan' ).forEach( id => {
 			if (id in state.particles()) {
@@ -199,10 +226,12 @@ function App({ v, route: parent, stream }){
 	)
 
 	A.stream.dropRepeats(route.$stream.map( x => x.tag )).map(
-		() => {
+		tag => {
+			console.log( tag, route().tag )
 			if( route.isGame(route())) {
 				console.log('setup')
 				state.players[1](true)
+				state.backgroundParticleSync[1](true)
 				state.rules[1]( shipData.rules )
 				state.gestureControlled[1](true)
 				state.rendering[1]({})
@@ -236,7 +265,7 @@ function App({ v, route: parent, stream }){
 					top: 0px;
 					left: 0px;
 					image-rendering: pixelated;
-					transform: translate(-50%, -50%) translate(var(--x, 0), var(--y, 0)) scale(var(--scale, 1)) rotate(var(--rotation, 0rad))
+					transform: translate3d(0,0,0) translate(-50%, -50%) translate3d(var(--x, 0), var(--y, 0)) scale(var(--scale, 1), 0) rotate(var(--rotation, 0rad))
 				`
 				,
 				{ id: id()
@@ -250,6 +279,71 @@ function App({ v, route: parent, stream }){
 					canvases(
 						({ [id()]: dom.getContext('2d') })
 					)
+				}
+				}
+			)
+		)
+	}
+
+	const backgroundCoords = stream.of({ x: 0, y: 0 })
+
+	raf.map(
+		() => Object.keys(state.backgroundParticleSync()).forEach(
+			id => {
+				const particle = state.particles[id]()
+
+				backgroundCoords({ x: particle.x, y: particle.y })
+			}
+		)
+	)
+
+	const InfiniteBackground = ({ background, coords, dimensions }) => {
+		return () => v('.infinite-background'
+			+ v.css`
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				position: relative;
+				top: 0px;
+				left: 0px;
+			`
+			, v('.layer'
+				+ v.css`
+					position: absolute;
+					--x: 0px;
+					--y: 0px;
+					width: 200%;
+					height: 200%;
+					transform: translate3d(0,0,0) translate(-50%, -50%) translate3d( var(--x, 0px), var(--y, 0px), 0 );
+					transition: none;
+				`
+				+ background()
+				,
+				{ hook: ({ dom }) => {
+					const mathMod = (m,p) => ((m % p) + p) % p
+					const tileWidth = 512
+					const tileHeight = 512
+
+					const vars =
+						v.stream.merge([coords, dimensions]).map( ([{ x, y },{ width: screenWidth,height: screenHeight }]) => {
+							const tilesHorizontal = Math.floor(screenWidth / tileWidth)
+							const tilesVertical = Math.floor(screenHeight / tileHeight)
+
+							const width = tileWidth * tilesHorizontal
+							const height = tileHeight * tilesVertical
+
+							const vars = {
+								x: mathMod( x * -1, width ) + 'px'
+								, y: mathMod( y * -1, height ) + 'px'
+							}
+
+							return vars
+						})
+
+					raf.map( () => {
+						dom.style.setProperty('--x', vars().x )
+						dom.style.setProperty('--y', vars().y )
+					})
 				}
 				}
 			)
@@ -272,7 +366,8 @@ function App({ v, route: parent, stream }){
 				, v('button', {
 					onclick(){
 						sounds().test.snd.play()
-						route( route.Game() )
+						const newRoute = route.Game()
+						route( newRoute )
 					}
 				}, 'Play')
 			)
@@ -301,13 +396,14 @@ function App({ v, route: parent, stream }){
 				,
 				{ key: 'splash'
 				, onclick: () => {
+					const newRoute = route.Game()
 					if( isMobile ) {
 						document.documentElement.requestFullscreen()
 						.finally(
-							() => route( route.Game() )
+							() => route( newRoute )
 						)
 					} else {
-						route(route.Game())
+						route( newRoute )
 					}
 				}
 				, hook: v.css.$animate.out('0.5s', {
@@ -352,12 +448,17 @@ function App({ v, route: parent, stream }){
 					transform-style: preserve-3d;
 					perspective: 1000px;
 					overflow: hidden;
-
-					// temporary
-					background: url(https://2.bp.blogspot.com/-F8vJLHc7beI/Wtnn9ztqETI/AAAAAAAACQU/rb9PQCSOEuEdsKIrejFGYWjWkSnj1cL7wCLcBGAs/s1600/startile.png);
-					background-position-x: 0px;
 				`
 				, { key: 'game' }
+
+				, v(InfiniteBackground, {
+					key: 'infinite-background',
+					dimensions: screenDimensions.actual,
+					coords: backgroundCoords,
+					background: v.css`
+						background: url(https://2.bp.blogspot.com/-F8vJLHc7beI/Wtnn9ztqETI/AAAAAAAACQU/rb9PQCSOEuEdsKIrejFGYWjWkSnj1cL7wCLcBGAs/s1600/startile.png);
+					`
+				})
 				, v('.camera'
 					+ v.css`
 						position: absolute;
@@ -365,11 +466,11 @@ function App({ v, route: parent, stream }){
 						left: 0px;
 						width: 0px;
 						height: 0px;
-						transform: translate(calc( var(--viewport-width) * 0.5), calc( var(--viewport-height) * 0.5 )) scale(-1,-1) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) scale(-1,-1) scale(var(--scale, 1));
+						transform: translate3d(0,0,0) translate(calc( var(--viewport-width) * 0.5), calc( var(--viewport-height) * 0.5 )) scale(-1,-1) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) scale(-1,-1) scale(var(--scale, 1));
 						transition: 1s;
 					`
 					,
-					{ hook: ({ dom }) => cameraEl(dom) }
+					{ hook: ({ dom }) => cameraEl(dom), key: 'camera' }
 					,v('.sprites'
 						+ v.css`
 							position: absolute;
@@ -387,6 +488,8 @@ function App({ v, route: parent, stream }){
 						top: 0px;
 						left: 0px;
 					`
+					,
+					{ key: 'hud' }
 					, v('button', {
 						onclick(){
 							sounds().test.snd.play()

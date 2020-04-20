@@ -43,35 +43,33 @@ export default function({ v, stream }){
             , rotation: window.screen.orientation.angle * Math.PI / 180
         })
 
-        try {
-            if( window.innerWidth < window.innerHeight ) {
-                document.body.classList.add('enable-rotate')
 
-                viewport({
-                    width: window.innerHeight,
-                    height: window.innerWidth,
-                    orientation: 'portrait',
-                    rotation: 0
-                })
-                v.redraw()
-            } else {
-                document.body.classList.remove('enable-rotate')
-                viewport({
-                    width: window.innerWidth,
-                    height: window.innerHeight,
-                    orientation: 'landscape',
-                    rotation: 0
-                })
+        if(isMobile){
+            try {
+                if( window.innerWidth < window.innerHeight ) {
+                    document.body.classList.add('enable-rotate')
 
-                v.redraw()
-            }
-        } catch (e) {}
+                    viewport({
+                        width: window.innerHeight,
+                        height: window.innerWidth,
+                        orientation: 'portrait',
+                        rotation: 0
+                    })
+                } else {
+                    document.body.classList.remove('enable-rotate')
+                    viewport({
+                        width: window.innerWidth,
+                        height: window.innerHeight,
+                        orientation: 'landscape',
+                        rotation: 0
+                    })
+                }
+            } catch (e) {}
+        }
     }
 
-    if(isMobile){
-        window.onresize = handleOrientation
-        handleOrientation()
-    }
+    window.onresize = handleOrientation
+    handleOrientation()
     // isMobile && window.addEventListener('orientationchange', handleOrientation)
 
     return { actual, viewport }
