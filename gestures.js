@@ -4,9 +4,11 @@ export default function gestures({ container, stream }){
 	const mc = new H(container)
 	const out = stream.of()
 
-	const buffer = []
+	const buffer = new Array(100).fill(null)
+	let bufferLength = 0
 	mc.on("press swipe pan panstart panend pinchstart pinch pinchend", e => {
-		buffer.push({ ...e, time: Date.now() })
+		buffer[bufferLength] = e
+		bufferLength += 1
 	})
 
 	mc.get('pan').set({ direction: H.DIRECTION_ALL })
@@ -16,13 +18,17 @@ export default function gestures({ container, stream }){
 
 	// faster than a tap
 	window.addEventListener('click', e => {
-		buffer.push({ type: 'tap', center: { x: e.x, y: e.y }, ...e, time: Date.now() })
+		e.center = { x: e.x, y: e.y }
+		buffer[bufferLength] = e
+		bufferLength += 1
 	})
 
 	function loop(){
 
-		buffer.forEach( x => out(x) )
-		buffer.length = 0
+		for( let i = 0; i < bufferLength; i++){
+			out( buffer[i] )
+		}
+		bufferLength = 0
 
 		requestAnimationFrame( loop )
 	}

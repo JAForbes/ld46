@@ -2110,6 +2110,8 @@ const Z = ({
     }
   };
 
+  const nested = {};
+
   const out = new Proxy(prop, {
     get(_, theirKey){
       const key =
@@ -2126,7 +2128,13 @@ const Z = ({
         } else if( key.startsWith('$') ) {
           return others[key.slice(1)]
         } else {
-          return query( x => x[key] )
+          // make simple property access queries cached
+          // to avoid memory leaks
+          if( key in nested ) {
+            return nested[key]
+          } else {
+            return nested[key] = query( x => x[key] )
+          }
         }
       } else {
         return others[key]

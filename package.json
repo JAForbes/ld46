@@ -20,7 +20,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "attain": "0.0.190",
+    "attain": "0.0.191",
     "bss": "1.6.4",
     "hammerjs": "2.0.8",
     "marked": "0.8.2",
