@@ -513,7 +513,7 @@ function App({ v, route: parent, stream }){
 							route( route.Menu() )
 							// v.redraw()
 						}
-					}, 'Menu')
+					}, 'Menu v1')
 				)
 			)
 		]
