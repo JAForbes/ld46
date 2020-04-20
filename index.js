@@ -302,7 +302,7 @@ function App({ v, route: parent, stream }){
 	}
 
 	const backgroundCoords = stream.of({ x: 0, y: 0 })
-
+	window.backgroundCoords = backgroundCoords
 	raf.map(
 		() => Object.keys(state.backgroundParticleSync()).forEach(
 			id => {
@@ -313,7 +313,7 @@ function App({ v, route: parent, stream }){
 		)
 	)
 
-	const InfiniteBackground = ({ background, coords, dimensions }) => {
+	const InfiniteBackground = ({ background, coords }) => {
 		return () => v('.infinite-background'
 			+ v.css`
 				width: 100%;
@@ -328,8 +328,8 @@ function App({ v, route: parent, stream }){
 					position: absolute;
 					--x: 0px;
 					--y: 0px;
-					width: 200%;
-					height: 200%;
+					width: 400%;
+					height: 400%;
 					transform: translate3d(0,0,0) translate(-50%, -50%) translate3d( var(--x, 0px), var(--y, 0px), 0 );
 					transition: none;
 				`
@@ -342,16 +342,9 @@ function App({ v, route: parent, stream }){
 
 					const vars =
 						coords.map( ({ x, y }) => {
-							const { width: screenWidth,height: screenHeight } = dimensions()
-							const tilesHorizontal = Math.floor(screenWidth / tileWidth)
-							const tilesVertical = Math.floor(screenHeight / tileHeight)
-
-							const width = tileWidth * tilesHorizontal
-							const height = tileHeight * tilesVertical
-
 							const vars = {
-								x: mathMod( x * -1, width ) + 'px'
-								, y: mathMod( y * -1, height ) + 'px'
+								x: mathMod( x * -1, tileWidth ) + 'px'
+								, y: mathMod( y * -1, tileHeight ) + 'px'
 							}
 
 							return vars
@@ -470,7 +463,6 @@ function App({ v, route: parent, stream }){
 
 				, v(InfiniteBackground, {
 					key: 'infinite-background',
-					dimensions: screenDimensions.actual,
 					coords: backgroundCoords,
 					background: v.css`
 						background: url(https://2.bp.blogspot.com/-F8vJLHc7beI/Wtnn9ztqETI/AAAAAAAACQU/rb9PQCSOEuEdsKIrejFGYWjWkSnj1cL7wCLcBGAs/s1600/startile.png);
