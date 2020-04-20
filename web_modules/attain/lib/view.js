@@ -1973,7 +1973,7 @@ const Z = ({
   // optional custom stream
   , read= () => theirStream2()
   , write= f => theirStream2( f(theirStream2()) )
-  , notify= f => watch( $$1() ) (theirStream2).map(f)
+  , notify= f => (watch( $$1() ) (theirStream2)) .map(f)
 }) => {
 
   const ourStream = of();
@@ -1987,15 +1987,35 @@ const Z = ({
 
   const over = f => {
     ignoreNotification = true;
-    write( $$1(f) );
 
-    return lastGet = ourStream( $$1() (read())[0] )
+    write(  state => {
+      const newState =
+        $$1(
+          target => {
+            lastGet = f(target);
+
+            return lastGet
+          }
+        ) (state);
+
+      return newState
+    });
+
+    ourStream(lastGet);
+    return lastGet
   };
 
   const throttled = ms =>
     afterSilence(ms) (dropRepeats(ourStream));
 
-  const get = () =>
+  const get = () => {
+    if( !lastGet ) {
+      computeGet();
+    }
+    return lastGet
+  };
+
+  const computeGet = () => {
     [ read() ]
     .map( $$1() )
     .map(
@@ -2012,10 +2032,12 @@ const Z = ({
       }
     )
     .shift();
+    ourStream(lastGet);
+  };
 
   notify( () => {
     if( !ignoreNotification ) {
-      ourStream( get() );
+      computeGet();
     }
     ignoreNotification = false;
   });
@@ -2052,12 +2074,27 @@ const Z = ({
     return z
   }
 
+  function mutate(f){
+    f(lastGet);
+    // notify
+    write( () => read() );
+
+    return lastGet
+  }
+
+  function mutateSilent(f){
+    f(lastGet);
+    return lastGet
+  }
+
   let others = {
     delete: remove
     , deleted: removed
     , stream: ourStream
     , query
     , throttled
+    , mutate
+    , mutateSilent
     , filter: f => query( x => x.$filter(f) )
     , flatMap: f => query( x => x.$flatMap(f) )
     , get values(){
@@ -2200,7 +2237,7 @@ function routeV2({
   const defaultOptions = { replace: false };
   function subroute(type$1, defaultRoute, theirDefinition, options={}){
 
-    options = { ...defaultOptions };
+    options = { ...defaultOptions, ...options };
 
     const parentRoute = out;
     const parentRouteValue = out();
@@ -2293,8 +2330,8 @@ function routeV2({
       } else if( typeof key == 'string' ){
         if( key in others ) {
           return others[key]
-        } else {
-          return route[key]
+        } else if (key === '$') {
+          return route
         }
       }
     }
@@ -2489,10 +2526,15 @@ function Inline({ attrs }){
     , ...customAttrs
   } = attrs;
 
-  const streamAttrs = Object.entries(customAttrs).reduce(
-    (p,[k,v]) => ({ ...p, [k]: dropRepeats(session$1.of(v)) })
-    , {}
-  );
+  const streamAttrs =
+    Object.entries(customAttrs).reduce(
+      (p,[k,v]) => ({ ...p,
+        [k]: typeof v == 'function'
+          ? v
+          : dropRepeats(session$1.of(v))
+      })
+      , {}
+    );
 
   streamAttrs.dom = attrs.stream();
 

@@ -225,7 +225,7 @@ function App({ v, route: parent, stream }){
 		})
 	)
 
-	A.stream.dropRepeats(route.$stream.map( x => x.tag )).map(
+	A.stream.dropRepeats(route.$.$stream.map( x => x.tag )).map(
 		tag => {
 			console.log( tag, route().tag )
 			if( route.isGame(route())) {
@@ -251,7 +251,7 @@ function App({ v, route: parent, stream }){
 		}
 	)
 
-	A.stream.dropRepeats(route.tag.$stream)
+	A.stream.dropRepeats(route.$.tag.$stream)
 		.map( () => v.redraw() )
 
 	function Entity({ v, id, state }){
