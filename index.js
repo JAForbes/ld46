@@ -58,9 +58,9 @@ function App({ v, route: parent, stream }){
 
 	const raf = A.stream.raf()
 
-	// actionService({
-	// 	canvases, sounds, playing, state, route, sheet, raf
-	// })
+	actionService({
+		canvases, sounds, playing, state, route, sheet, raf
+	})
 
 	const lastGesture =
 		gestures({ container: document.body, stream })
@@ -69,45 +69,45 @@ function App({ v, route: parent, stream }){
 		stream, screenDimensions, gesture: lastGesture
 	})
 
-	// const cameraEl = A.stream.of()
-	// const cameraScale = A.stream.of(1)
+	const cameraEl = A.stream.of()
+	const cameraScale = A.stream.of(1)
 
-	// function pinchScale(lastGesture){
-	// 	const out = A.stream.of()
-	// 	let prevPinchScale = 1
-	// 	let pinchScaleDelta = 1
+	function pinchScale(lastGesture){
+		const out = A.stream.of()
+		let prevPinchScale = 1
+		let pinchScaleDelta = 1
 
-	// 	lastGesture.map( x => {
+		lastGesture.map( x => {
 
-	// 		if( x.type == 'pinch' ) {
-	// 			pinchScaleDelta = (prevPinchScale - x.scale) * -1
-	// 			prevPinchScale = x.scale
-	// 			out(pinchScaleDelta)
-	// 		}
-	// 		if(x.type.includes('pinchend')){
-	// 			prevPinchScale = 1
-	// 		}
-	// 	})
-	// 	return out
-	// }
+			if( x.type == 'pinch' ) {
+				pinchScaleDelta = (prevPinchScale - x.scale) * -1
+				prevPinchScale = x.scale
+				out(pinchScaleDelta)
+			}
+			if(x.type.includes('pinchend')){
+				prevPinchScale = 1
+			}
+		})
+		return out
+	}
 
-	// A.stream.merge([
-	// 	pinchScale (relativeGesture),
-	// 	cameraEl
-	// ])
-	// 	.map(
-	// 		([scale, el]) => {
-	// 			const old = cameraScale()
+	A.stream.merge([
+		pinchScale (relativeGesture),
+		cameraEl
+	])
+		.map(
+			([scale, el]) => {
+				const old = cameraScale()
 
-	// 			const MIN_SCALE = 1
-	// 			const MAX_SCALE = 10
+				const MIN_SCALE = 1
+				const MAX_SCALE = 10
 
-	// 			const newScale = Math.max(MIN_SCALE, Math.min( MAX_SCALE, ( old + scale ) ))
+				const newScale = Math.max(MIN_SCALE, Math.min( MAX_SCALE, ( old + scale ) ))
 
-	// 			el.style.setProperty('--scale', newScale)
-	// 			cameraScale(newScale)
-	// 		}
-	// 	)
+				el.style.setProperty('--scale', newScale)
+				cameraScale(newScale)
+			}
+		)
 
 	// Object.assign(window, {
 	// 	state, sheet, sounds, route, canvases, v, lastGesture,
@@ -194,52 +194,52 @@ function App({ v, route: parent, stream }){
 		})
 	})
 
-	// relativePan.map( ({ theta, type }) =>
-	// 	Object.keys(state.gestureControlled()).filter( () => type == 'pan' ).forEach( id => {
-	// 		if (id in state.particles()) {
+	relativePan.map( ({ theta, type }) =>
+		Object.keys(state.gestureControlled()).filter( () => type == 'pan' ).forEach( id => {
+			if (id in state.particles()) {
 
-	// 			const deg =
-	// 				((theta * 180 / Math.PI) + 720) % 360
+				const deg =
+					((theta * 180 / Math.PI) + 720) % 360
 
-	// 			var ordinal =
-	// 				['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'].map( x => x.toLowerCase() )
+				var ordinal =
+					['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'].map( x => x.toLowerCase() )
 
-	// 			var ranges =
-	// 				ordinal.map(
-	// 					(x, i) => ({ x, deg: -22.5 + (i * 45) })
-	// 				)
-	// 				.map(
-	// 					({ x, deg }) => ({ x, start: deg, end: deg + 45 })
-	// 				)
+				var ranges =
+					ordinal.map(
+						(x, i) => ({ x, deg: -22.5 + (i * 45) })
+					)
+					.map(
+						({ x, deg }) => ({ x, start: deg, end: deg + 45 })
+					)
 
-	// 			ranges.push({ x: "n", start: 337.5, end: 360 })
+				ranges.push({ x: "n", start: 337.5, end: 360 })
 
-	// 			const action =
-	// 				ranges.find(
-	// 					({ start, end }) => deg > start && deg <= end
-	// 				)
-	// 				.x
+				const action =
+					ranges.find(
+						({ start, end }) => deg > start && deg <= end
+					)
+					.x
 
-	// 			const actions = state.actors[id].actions() || {}
+				const actions = state.actors[id].actions() || {}
 
-	// 			const oldTime = actions[action] || Date.now()
-	// 			ordinal.forEach( k => delete actions[k] )
-	// 			actions[action] = oldTime
+				const oldTime = actions[action] || Date.now()
+				ordinal.forEach( k => delete actions[k] )
+				actions[action] = oldTime
 
-	// 			state.particles[id].$mutate(
-	// 				x => {
-	// 					x.theta = theta
-	// 				}
-	// 			)
-	// 			state.actors[id].$mutate(
-	// 				x => {
-	// 					x.actions = actions
-	// 				}
-	// 			)
-	// 			// state.actors[id].actions(actions)
-	// 		}
-	// 	})
-	// )
+				state.particles[id].$mutate(
+					x => {
+						x.theta = theta
+					}
+				)
+				state.actors[id].$mutate(
+					x => {
+						x.actions = actions
+					}
+				)
+				// state.actors[id].actions(actions)
+			}
+		})
+	)
 
 	A.stream.dropRepeats(route.$.$stream.map( x => x.tag )).map(
 		tag => {
@@ -274,6 +274,7 @@ function App({ v, route: parent, stream }){
 		const dimensions =
 			state.dimensions()[id] || { x: 32, y: 32 }
 
+		// transform: translate3d(0,0,0) translate(var(--x, 0), var(--y, 0)) scale(var(--scale, 1), 0) rotate(var(--rotation, 0rad))
 		return () =>
 			v('entity'
 				+ v.css`
@@ -281,7 +282,9 @@ function App({ v, route: parent, stream }){
 					top: 0px;
 					left: 0px;
 					image-rendering: pixelated;
-					transform: translate3d(0,0,0) translate(-50%, -50%) translate3d(var(--x, 0), var(--y, 0)) scale(var(--scale, 1), 0) rotate(var(--rotation, 0rad))
+					width: 32px;
+					height: 32px;
+					transform: translate3d(0,0,0) translate(-50%, -50%) translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px)) rotate(var(--rotation, 0deg)) scale(var(--scale, 1))
 				`
 				,
 				{ id: id()
@@ -480,7 +483,7 @@ function App({ v, route: parent, stream }){
 					`
 					,
 					{ key: 'camera'
-					// , hook: ({ dom }) => cameraEl(dom)
+					, hook: ({ dom }) => cameraEl(dom)
 					}
 					,v('.sprites'
 						+ v.css`
