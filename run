@@ -7,10 +7,12 @@ function dev(){
 }
 
 function deploy(){
+    local now;
+    now=`node -p "Date.now()"`
+
     mkdir -p dist
     rm -fr ./dist/*
-
-    cp index.html ./dist/index.html
+    cat index.html | sed "s,?version,?version=$now," > ./dist.index.html
     cp manifest.json ./dist/manifest.json
     cp -r web_modules ./dist/
     cp *.js ./dist/
