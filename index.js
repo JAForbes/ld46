@@ -109,10 +109,10 @@ function App({ v, route: parent, stream }){
 			}
 		)
 
-	// Object.assign(window, {
-	// 	state, sheet, sounds, route, canvases, v, lastGesture,
-	// 	screenDimensions, relativeGesture
-	// })
+	Object.assign(window, {
+		state, sheet, sounds, route, canvases, v, lastGesture,
+		screenDimensions, relativeGesture
+	})
 
 	state.muted = stream.of(false)
 	state.rendering = A.Z({ stream: stream.of({}) })
@@ -128,38 +128,38 @@ function App({ v, route: parent, stream }){
 	state.players = A.Z({ stream: stream.of({} )})
 	state.rules = A.Z({ stream: stream.of({} )})
 
-	// relativeGesture.map( ({ type }) =>
-	// 	Object.keys(state.gestureControlled()).forEach( id => {
-	// 		if ( type == 'panstart' ) {
-	// 			state.actors[id].actions.moving(Date.now())
-	// 		} else if ( type == 'panend' ) {
-	// 			state.actors[id].actions.moving.$delete()
-	// 		}
-	// 	})
-	// )
+	relativeGesture.map( ({ type }) =>
+		Object.keys(state.gestureControlled()).forEach( id => {
+			if ( type == 'panstart' ) {
+				state.actors[id].actions.moving(Date.now())
+			} else if ( type == 'panend' ) {
+				state.actors[id].actions.moving.$delete()
+			}
+		})
+	)
 
 	const relativePan =
 		A.stream.filter( x => x.type == 'pan' ) (relativeGesture)
 
 
-	// const panDistanceFromCenter =
-	// 	relativePan.map( ({ x, y }) => {
-	// 		return Math.sqrt( x ** 2 + y ** 2 )
-	// 	})
+	const panDistanceFromCenter =
+		relativePan.map( ({ x, y }) => {
+			return Math.sqrt( x ** 2 + y ** 2 )
+		})
 
-	// A.stream.filter( x => x.type == 'panend' ) ( relativeGesture )
-	// 	.map( () => panDistanceFromCenter(Infinity) )
+	A.stream.filter( x => x.type == 'panend' ) ( relativeGesture )
+		.map( () => panDistanceFromCenter(Infinity) )
 
-	// A.stream.dropRepeats(panDistanceFromCenter.map( x => x < 100  ))
-	// 	.map(
-	// 		firing => Object.keys(state.gestureControlled() ).forEach( id => {
-	// 			if( firing ) {
-	// 				state.actors[id].actions.firing( Date.now() )
-	// 			} else {
-	// 				state.actors[id].actions.firing.$delete()
-	// 			}
-	// 		})
-	// 	)
+	A.stream.dropRepeats(panDistanceFromCenter.map( x => x < 100  ))
+		.map(
+			firing => Object.keys(state.gestureControlled() ).forEach( id => {
+				if( firing ) {
+					state.actors[id].actions.firing( Date.now() )
+				} else {
+					state.actors[id].actions.firing.$delete()
+				}
+			})
+		)
 
 	relativePan.map( ({ x, y }) => {
 		const polarity = { x: x > 0 ? 1 : -1, y: y > 1 ? 1 : -1 }
