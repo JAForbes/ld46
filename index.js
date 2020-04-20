@@ -168,8 +168,8 @@ function App({ v, route: parent, stream }){
 			const particle = state.particles[id]
 
 			particle.$mutateSilent( o => {
-				o.vx += 0.5 * polarity.x
-				o.vy += 0.5 * polarity.y
+				o.vx += 1 * polarity.x
+				o.vy += 1 * polarity.y
 			})
 
 		})
@@ -181,8 +181,15 @@ function App({ v, route: parent, stream }){
 				o.x += o.vx
 				o.y += o.vy
 
-				o.vy *= 0.99
-				o.vx *= 0.99
+				o.vy *= 0.95
+				o.vx *= 0.95
+
+				if( Math.abs(o.vx) < 0.001 ) {
+					o.vx = 0
+				}
+				if( Math.abs(o.vy) < 0.001 ) {
+					o.vy = 0
+				}
 			})
 		})
 	})
@@ -219,8 +226,17 @@ function App({ v, route: parent, stream }){
 				ordinal.forEach( k => delete actions[k] )
 				actions[action] = oldTime
 
-				state.particles[id].theta(theta)
-				state.actors[id].actions(actions)
+				state.particles[id].$mutate(
+					x => {
+						x.theta = theta
+					}
+				)
+				state.actors[id].$mutate(
+					x => {
+						x.actions = actions
+					}
+				)
+				// state.actors[id].actions(actions)
 			}
 		})
 	)
@@ -325,7 +341,8 @@ function App({ v, route: parent, stream }){
 					const tileHeight = 512
 
 					const vars =
-						v.stream.merge([coords, dimensions]).map( ([{ x, y },{ width: screenWidth,height: screenHeight }]) => {
+						coords.map( ({ x, y }) => {
+							const { width: screenWidth,height: screenHeight } = dimensions()
 							const tilesHorizontal = Math.floor(screenWidth / tileWidth)
 							const tilesVertical = Math.floor(screenHeight / tileHeight)
 
