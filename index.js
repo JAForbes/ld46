@@ -162,14 +162,13 @@ function App({ v, route: parent, stream }){
 		)
 
 	relativePan.map( ({ x, y }) => {
-		const polarity = { x: x > 0 ? 1 : -1, y: y > 1 ? 1 : -1 }
 
 		Object.keys(state.gestureControlled()).map( id => {
 			const particle = state.particles[id]
 
 			particle.$mutate( o => {
-				o.vx += 1 * polarity.x
-				o.vy += 1 * polarity.y
+				o.vx += x / 200
+				o.vy += y / 200
 			})
 
 		})
@@ -181,8 +180,8 @@ function App({ v, route: parent, stream }){
 				o.x += o.vx
 				o.y += o.vy
 
-				o.vy *= 0.95
 				o.vx *= 0.95
+				o.vy *= 0.95
 
 				if( Math.abs(o.vx) < 0.001 ) {
 					o.vx = 0
