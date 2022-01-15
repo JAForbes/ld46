@@ -23,7 +23,7 @@
     "attain": "0.0.191",
     "bss": "1.6.4",
     "hammerjs": "2.0.8",
-    "marked": "0.8.2",
+    "marked": "4.0.10",
     "mithril": "2.0.4",
     "mithril-stream": "2.0.0",
     "ramda": "0.27.0"
